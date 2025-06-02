@@ -15,6 +15,10 @@ const QuizPage: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState(10 * 60); // 10 minutes in seconds (configurable)
   const [markedForReview, setMarkedForReview] = useState<Set<number>>(new Set());
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [points, setPoints] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [showPointsAnimation, setShowPointsAnimation] = useState(false);
   const navigate = useNavigate();
 
   const IMAGE_SERVER_BASE = "http://localhost:8000";
@@ -60,10 +64,23 @@ const QuizPage: React.FC = () => {
     return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
   const handleAnswerSelect = (questionNumber: number, option: string) => {
+    const wasAnswered = answers[questionNumber];
     setAnswers(prev => ({
       ...prev,
       [questionNumber]: option
     }));
+    
+    // Gamification: Add points for new answers
+    if (!wasAnswered) {
+      setPoints(prev => prev + 10);
+      setShowPointsAnimation(true);
+      setTimeout(() => setShowPointsAnimation(false), 1000);
+      
+      // Add haptic feedback if available
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
+      }
+    }
   };
 
   const handleMarkForReview = () => {
@@ -90,7 +107,22 @@ const QuizPage: React.FC = () => {
 
   const handleSubmitQuiz = () => {
     if (window.confirm('Are you sure you want to submit the quiz?')) {
+      // Gamification: Calculate bonus points
+      let bonusPoints = 0;
+      const completionRate = (answeredCount / questions.length) * 100;
+      
+      if (completionRate === 100) bonusPoints += 50; // Perfect completion
+      if (markedForReview.size === 0) bonusPoints += 25; // No reviews needed
+      if (timeLeft > (10 * 60 * 0.5)) bonusPoints += 30; // Speed bonus
+      
+      const totalPoints = points + bonusPoints;
+      setPoints(totalPoints);
+      
+      // Save quiz data with gamification stats
       localStorage.setItem('quizAnswers', JSON.stringify(answers));
+      localStorage.setItem('quizPoints', totalPoints.toString());
+      localStorage.setItem('quizStreak', (streak + 1).toString());
+      
       navigate('/results');
     }
   };
@@ -122,122 +154,183 @@ const QuizPage: React.FC = () => {
     );
   }
   return (
-    <div className="h-screen bg-gray-100 flex flex-col">
-      {/* Fixed Header */}
-      <div className="bg-blue-700 text-white p-4 flex justify-between items-center flex-shrink-0">
-        <div className="flex items-center space-x-6">
-          <h1 className="text-xl font-bold">{selectedQuiz.replace(/-/g, ' ')} | Physics</h1>
-          <div className="text-sm">
-            Question {currentQuestion.questionNumber} of {questions.length}
+    <div className="h-screen bg-gray-100 flex flex-col animate-fadeIn">
+      {/* Fixed Header - Enhanced Mobile */}
+      <div className="bg-blue-700 text-white p-3 md:p-4 flex justify-between items-center flex-shrink-0 relative animate-slideDown">
+        <div className="flex items-center space-x-2 md:space-x-6">
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            className="md:hidden bg-blue-600 p-2 rounded-lg hover:bg-blue-800 transition-all duration-300 transform hover:scale-110 active:scale-95"
+          >
+            <svg className={`w-5 h-5 transform transition-transform duration-300 ${showMobileMenu ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          
+          <div>
+            <h1 className="text-lg md:text-xl font-bold animate-pulse">{selectedQuiz.replace(/-/g, ' ')} | Physics</h1>
+            <div className="text-xs md:text-sm">
+              Question {currentQuestion.questionNumber} of {questions.length}
+            </div>
           </div>
         </div>
+        
         <div className="text-right">
-          <div className="text-lg font-bold text-red-300">
+          {/* Gamification Points */}
+          <div className="hidden md:flex items-center space-x-4 mb-1">
+            <div className="text-sm transform hover:scale-110 transition-transform duration-300 relative">
+              <span className={`text-yellow-300 ${showPointsAnimation ? 'animate-bounce' : 'animate-bounce'}`}>⭐ {points} pts</span>
+              {showPointsAnimation && (
+                <span className="absolute -top-2 -right-2 text-green-400 text-xs font-bold animate-bounceIn">+10</span>
+              )}
+            </div>
+            <div className="text-sm transform hover:scale-110 transition-transform duration-300">
+              <span className="text-green-300 animate-pulse">🔥 {streak} streak</span>
+            </div>
+          </div>
+          <div className="text-lg font-bold text-red-300 animate-pulse">
             ⏰ {formatTime(timeLeft)}
           </div>
         </div>
       </div>
 
-      {/* Main Content - Fixed Height with Flex */}
-      <div className="flex flex-1 overflow-hidden gap-4 p-4">
+      {/* Main Content - Responsive Layout */}
+      <div className="flex flex-1 overflow-hidden">
         {/* Left Content - Scrollable */}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-hidden p-2 md:p-4">
           {/* Question Content - Scrollable */}
-          <div className="flex-1 overflow-y-auto p-6 bg-white rounded-lg shadow-sm">
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-white rounded-lg shadow-sm animate-slideInLeft">
             {/* Question Text */}
-            <div className="mb-6">
-              <p className="text-lg font-medium text-gray-800 leading-relaxed">
+            <div className="mb-4 md:mb-6 animate-fadeIn">
+              <p className="text-base md:text-lg font-medium text-gray-800 leading-relaxed">
                 {currentQuestion.questionText}
               </p>
             </div>
 
-            {/* Question Images - Only show if images exist */}
+            {/* Question Images - Mobile Optimized */}
             {currentQuestion.question_images && currentQuestion.question_images.length > 0 && (
-              <div className="mb-6">
-                <div className="flex flex-wrap gap-4">
+              <div className="mb-4 md:mb-6 animate-slideInUp">
+                <div className="flex flex-col md:flex-row md:flex-wrap gap-3 md:gap-4">
                   {currentQuestion.question_images.map((imagePath, index) => (
-                    <div key={index} className="border rounded-lg p-3 bg-gray-50">
+                    <div key={index} className="border rounded-lg p-2 md:p-3 bg-gray-50 w-full md:w-auto transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
                       <img
                         src={`${IMAGE_SERVER_BASE}/${imagePath}`}
                         alt={`Diagram ${index + 1}`}
-                        className="max-h-64 object-contain rounded cursor-pointer hover:shadow-lg transition-shadow"
+                        className="max-h-48 md:max-h-64 w-full md:w-auto object-contain rounded cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:scale-102"
                         onClick={() => setSelectedImage(`${IMAGE_SERVER_BASE}/${imagePath}`)}
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
                         }}
-                        onContextMenu={(e) => e.preventDefault()} // Prevent right-click
-                        draggable={false} // Prevent dragging
+                        onContextMenu={(e) => e.preventDefault()}
+                        draggable={false}
                       />
-                      <p className="text-center text-sm text-gray-600 mt-2">Diagram {index + 1}</p>
+                      <p className="text-center text-xs md:text-sm text-gray-600 mt-2">Diagram {index + 1}</p>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Answer Options */}
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Select your answer:</h3>
-              <div className="space-y-3">
+            {/* Answer Options - Modern Card Design */}
+            <div className="mb-4 md:mb-6">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-3 md:mb-4 animate-fadeIn">Select your answer:</h3>
+              <div className="space-y-2 md:space-y-3">
                 {currentQuestion.option_with_images_.map((option, index) => {
-                  const optionLabel = String.fromCharCode(65 + index); // A, B, C, D
+                  const optionLabel = String.fromCharCode(65 + index);
                   const isSelected = answers[currentQuestion.questionNumber] === optionLabel;
                   const isImageOption = option.includes('.png') || option.includes('.jpg') || option.includes('.jpeg');
                   
                   return (
-                    <label
+                    <div
                       key={index}
-                      className={`flex items-start p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
+                      onClick={() => handleAnswerSelect(currentQuestion.questionNumber, optionLabel)}
+                      className={`group relative cursor-pointer transition-all duration-300 transform hover:scale-[1.02] animate-slideInRight ${
                         isSelected 
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' 
-                          : 'border-gray-300 hover:border-blue-300 hover:bg-gray-50'
+                          ? 'scale-[1.02]' 
+                          : ''
                       }`}
+                      style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      <input
-                        type="radio"
-                        name={`question-${currentQuestion.questionNumber}`}
-                        value={optionLabel}
-                        checked={isSelected}
-                        onChange={() => handleAnswerSelect(currentQuestion.questionNumber, optionLabel)}
-                        className="mt-1 mr-4 w-4 h-4 text-blue-600"
-                      />
-                      <div className="flex-1">
-                        <span className="font-semibold text-blue-600 mr-2">({optionLabel})</span>
-                        {isImageOption ? (
-                          <div className="mt-2">
-                            <img
-                              src={`${IMAGE_SERVER_BASE}/${option}`}
-                              alt={`Option ${optionLabel}`}
-                              className="max-h-20 object-contain rounded border cursor-pointer hover:shadow-lg transition-shadow"
-                              onClick={(e) => {
-                                e.stopPropagation(); // Prevent radio button selection
-                                setSelectedImage(`${IMAGE_SERVER_BASE}/${option}`);
-                              }}
-                              onError={(e) => {
-                                e.currentTarget.style.display = 'none';
-                              }}
-                              onContextMenu={(e) => e.preventDefault()} // Prevent right-click
-                              draggable={false} // Prevent dragging
-                            />
+                      <div className={`p-3 md:p-4 border-2 rounded-xl transition-all duration-300 ${
+                        isSelected 
+                          ? 'border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-200 animate-pulse' 
+                          : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50 hover:shadow-md'
+                      }`}>
+                        <div className="flex items-start space-x-3 md:space-x-4">
+                          {/* Custom Radio Button */}
+                          <div className={`flex-shrink-0 w-6 h-6 md:w-7 md:h-7 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                            isSelected 
+                              ? 'border-blue-500 bg-blue-500 animate-bounceIn' 
+                              : 'border-gray-300 group-hover:border-blue-400'
+                          }`}>
+                            {isSelected && (
+                              <svg className="w-3 h-3 md:w-4 md:h-4 text-white animate-checkmark" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            )}
                           </div>
-                        ) : (
-                          <span className="text-gray-800">{option}</span>
-                        )}
+                          
+                          <div className="flex-1 min-w-0">
+                            {/* Option Label Badge */}
+                            <div className="flex items-start space-x-2 md:space-x-3">
+                              <span className={`inline-flex items-center justify-center w-6 h-6 md:w-7 md:h-7 rounded-full text-xs md:text-sm font-bold transition-all duration-300 ${
+                                isSelected 
+                                  ? 'bg-blue-500 text-white animate-bounceIn' 
+                                  : 'bg-gray-200 text-gray-700 group-hover:bg-blue-200'
+                              }`}>
+                                {optionLabel}
+                              </span>
+                              
+                              <div className="flex-1">
+                                {isImageOption ? (
+                                  <div className="mt-1">
+                                    <img
+                                      src={`${IMAGE_SERVER_BASE}/${option}`}
+                                      alt={`Option ${optionLabel}`}
+                                      className="max-h-16 md:max-h-20 object-contain rounded border cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(`${IMAGE_SERVER_BASE}/${option}`);
+                                      }}
+                                      onError={(e) => {
+                                        e.currentTarget.style.display = 'none';
+                                      }}
+                                      onContextMenu={(e) => e.preventDefault()}
+                                      draggable={false}
+                                    />
+                                  </div>
+                                ) : (
+                                  <span className="text-sm md:text-base text-gray-800 leading-relaxed">{option}</span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </label>
+                      
+                      {/* Selection Animation */}
+                      {isSelected && (
+                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center animate-bounceIn">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
               </div>
             </div>
           </div>
 
-          {/* Fixed Action Buttons */}
-          <div className="bg-white mt-4 p-4 rounded-lg shadow-sm flex-shrink-0">
-            <div className="flex justify-between items-center">
+          {/* Fixed Action Buttons - Mobile Responsive */}
+          <div className="bg-white mt-2 md:mt-4 p-3 md:p-4 rounded-lg shadow-sm flex-shrink-0">
+            <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
               <button
                 onClick={() => setCurrentQuestionIndex(Math.max(0, currentQuestionIndex - 1))}
                 disabled={currentQuestionIndex === 0}
-                className={`flex items-center px-4 py-2 rounded-lg font-medium ${
+                className={`w-full md:w-auto flex items-center justify-center px-4 py-2 rounded-lg font-medium ${
                   currentQuestionIndex === 0
                     ? 'bg-gray-300 cursor-not-allowed text-gray-500'
                     : 'bg-gray-600 hover:bg-gray-700 text-white'
@@ -246,28 +339,28 @@ const QuizPage: React.FC = () => {
                 ← Previous
               </button>
 
-              <div className="flex space-x-3">
+              <div className="flex flex-wrap justify-center gap-2 md:space-x-3">
                 <button
                   onClick={handleMarkForReview}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  className={`px-3 md:px-4 py-2 rounded-lg font-medium transition-colors text-sm md:text-base ${
                     markedForReview.has(currentQuestion.questionNumber)
                       ? 'bg-orange-500 hover:bg-orange-600 text-white'
                       : 'bg-yellow-500 hover:bg-yellow-600 text-white'
                   }`}
                 >
-                  Mark for Review
+                  Mark Review
                 </button>
                 
                 <button
                   onClick={clearResponse}
-                  className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium"
+                  className="px-3 md:px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium text-sm md:text-base"
                 >
-                  Clear Response
+                  Clear
                 </button>
                 
                 <button
                   onClick={handleSubmitQuiz}
-                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium"
+                  className="px-3 md:px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium text-sm md:text-base"
                 >
                   Submit Quiz
                 </button>
@@ -276,7 +369,7 @@ const QuizPage: React.FC = () => {
               <button
                 onClick={() => setCurrentQuestionIndex(Math.min(questions.length - 1, currentQuestionIndex + 1))}
                 disabled={currentQuestionIndex === questions.length - 1}
-                className={`flex items-center px-4 py-2 rounded-lg font-medium ${
+                className={`w-full md:w-auto flex items-center justify-center px-4 py-2 rounded-lg font-medium ${
                   currentQuestionIndex === questions.length - 1
                     ? 'bg-gray-300 cursor-not-allowed text-gray-500'
                     : 'bg-blue-600 hover:bg-blue-700 text-white'
@@ -287,102 +380,159 @@ const QuizPage: React.FC = () => {
             </div>
           </div>
         </div>
-        {/* Right Sidebar - Card-based Design with Proper Spacing */}
-        <div className="w-80 flex-shrink-0 flex flex-col space-y-4">
+        {/* Right Sidebar - Mobile Responsive with Overlay */}
+        <div className={`${showMobileMenu ? 'fixed inset-0 z-40' : 'hidden'} md:relative md:block`}>
+          {/* Mobile Overlay */}
+          {showMobileMenu && (
+            <div 
+              className="absolute inset-0 bg-black bg-opacity-50 md:hidden"
+              onClick={() => setShowMobileMenu(false)}
+            />
+          )}
           
-          {/* Question Palette Card - Made Smaller */}
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <h3 className="text-base font-bold text-gray-800 mb-3">Question Palette</h3>
+          {/* Sidebar Content */}
+          <div className={`${
+            showMobileMenu 
+              ? 'fixed top-0 right-0 h-full w-80 z-50 transform translate-x-0' 
+              : 'hidden'
+          } md:relative md:block md:w-80 md:transform-none bg-white flex-shrink-0 flex flex-col space-y-4 p-4 overflow-y-auto transition-transform duration-300 ease-in-out`}>
             
-            {/* Question Numbers Grid */}
-            <div className="grid grid-cols-5 gap-1.5 mb-3">
-              {questions.map((question, index) => {
-                const status = getQuestionStatus(question.questionNumber);
-                
-                let bgColor = 'bg-gray-300 text-gray-700'; // not-visited
-                if (status === 'current') bgColor = 'bg-blue-600 text-white ring-2 ring-blue-300';
-                else if (status === 'answered-marked') bgColor = 'bg-purple-500 text-white';
-                else if (status === 'answered') bgColor = 'bg-green-500 text-white';
-                else if (status === 'marked') bgColor = 'bg-orange-500 text-white';
-                
-                return (
-                  <button
-                    key={question.questionNumber}
-                    onClick={() => setCurrentQuestionIndex(index)}
-                    className={`w-8 h-8 rounded-full font-bold text-xs transition-all duration-200 hover:scale-105 ${bgColor}`}
-                  >
-                    {question.questionNumber}
-                  </button>
-                );
-              })}
+            {/* Mobile Close Button */}
+            {showMobileMenu && (
+              <button
+                onClick={() => setShowMobileMenu(false)}
+                className="md:hidden self-end p-2 text-gray-500 hover:text-gray-700"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+
+            {/* Mobile Stats Bar */}
+            <div className="md:hidden bg-blue-50 p-3 rounded-lg">
+              <div className="flex justify-between text-sm">
+                <span className="text-blue-600 font-medium">⭐ {points} pts</span>
+                <span className="text-green-600 font-medium">🔥 {streak} streak</span>
+              </div>
+            </div>
+          
+            {/* Question Palette Card */}
+            <div className="bg-white rounded-lg shadow-md border p-4">
+              <h3 className="text-base font-bold text-gray-800 mb-3">Question Palette</h3>
+              
+              {/* Question Numbers Grid */}
+              <div className="grid grid-cols-5 gap-1.5 mb-3">
+                {questions.map((question, index) => {
+                  const status = getQuestionStatus(question.questionNumber);
+                  
+                  let bgColor = 'bg-gray-300 text-gray-700';
+                  if (status === 'current') bgColor = 'bg-blue-600 text-white ring-2 ring-blue-300';
+                  else if (status === 'answered-marked') bgColor = 'bg-purple-500 text-white';
+                  else if (status === 'answered') bgColor = 'bg-green-500 text-white';
+                  else if (status === 'marked') bgColor = 'bg-orange-500 text-white';
+                  
+                  return (
+                    <button
+                      key={question.questionNumber}
+                      onClick={() => {
+                        setCurrentQuestionIndex(index);
+                        setShowMobileMenu(false);
+                      }}
+                      className={`w-8 h-8 md:w-9 md:h-9 rounded-full font-bold text-xs transition-all duration-200 hover:scale-105 ${bgColor}`}
+                    >
+                      {question.questionNumber}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Legend - Compact */}
+              <div>
+                <h4 className="text-xs font-semibold text-gray-700 mb-2">Legend:</h4>
+                <div className="grid grid-cols-2 gap-1 text-xs">
+                  <div className="flex items-center space-x-1">
+                    <div className="w-4 h-4 bg-blue-600 rounded-full text-white flex items-center justify-center text-xs font-bold">4</div>
+                    <span className="text-gray-600">Current</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-4 h-4 bg-green-500 rounded-full text-white flex items-center justify-center text-xs font-bold">1</div>
+                    <span className="text-gray-600">Answered</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-4 h-4 bg-orange-500 rounded-full text-white flex items-center justify-center text-xs font-bold">2</div>
+                    <span className="text-gray-600">Marked</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-4 h-4 bg-purple-500 rounded-full text-white flex items-center justify-center text-xs font-bold">3</div>
+                    <span className="text-gray-600">Both</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Legend - Compact */}
-            <div>
-              <h4 className="text-xs font-semibold text-gray-700 mb-2">Legend:</h4>
-              <div className="grid grid-cols-2 gap-1 text-xs">
-                <div className="flex items-center space-x-1">
-                  <div className="w-4 h-4 bg-blue-600 rounded-full text-white flex items-center justify-center text-xs font-bold">4</div>
-                  <span className="text-gray-600">Current</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <div className="w-4 h-4 bg-green-500 rounded-full text-white flex items-center justify-center text-xs font-bold">1</div>
+            {/* Progress Card */}
+            <div className="bg-white rounded-lg shadow-md border p-4">
+              <h4 className="text-base font-bold text-gray-800 mb-3">Progress</h4>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
                   <span className="text-gray-600">Answered</span>
+                  <span className="font-semibold text-green-600">{answeredCount} / {questions.length}</span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <div className="w-4 h-4 bg-orange-500 rounded-full text-white flex items-center justify-center text-xs font-bold">2</div>
+                <div className="flex justify-between">
                   <span className="text-gray-600">Marked</span>
+                  <span className="font-semibold text-orange-600">{markedForReview.size}</span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <div className="w-4 h-4 bg-purple-500 rounded-full text-white flex items-center justify-center text-xs font-bold">3</div>
-                  <span className="text-gray-600">Both</span>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Remaining</span>
+                  <span className="font-semibold text-gray-800">{questions.length - answeredCount}</span>
+                </div>
+              </div>
+              
+              {/* Progress Bar */}
+              <div className="mt-3">
+                <div className="bg-gray-200 rounded-full h-2">
+                  <div 
+                    className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${(answeredCount / questions.length) * 100}%` }}
+                  ></div>
+                </div>
+                <p className="text-sm text-gray-600 mt-1 text-center font-medium">
+                  {Math.round((answeredCount / questions.length) * 100)}% Complete
+                </p>
+              </div>
+            </div>
+
+            {/* Instructions Card */}
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg shadow-md p-4">
+              <h4 className="text-base font-bold text-yellow-800 mb-3">Instructions</h4>
+              <ul className="text-sm text-yellow-700 space-y-1">
+                <li>• Select one option per question</li>
+                <li>• Use Mark for Review for later</li>
+                <li>• Clear Response to deselect</li>
+                <li>• Submit when ready</li>
+              </ul>
+            </div>
+
+            {/* Gamification Stats Card */}
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg shadow-md p-4">
+              <h4 className="text-base font-bold text-purple-800 mb-3">Your Score</h4>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-purple-700">Points Earned</span>
+                  <span className="font-bold text-purple-800 text-lg">{points}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-purple-700">Current Streak</span>
+                  <span className="font-bold text-purple-800">{streak} 🔥</span>
+                </div>
+                <div className="mt-3 p-2 bg-white rounded-lg">
+                  <div className="text-xs text-center text-gray-600">
+                    +10 pts per answer • +50 pts perfect score
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Progress Card */}
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <h4 className="text-base font-bold text-gray-800 mb-3">Progress</h4>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-gray-600">Answered</span>
-                <span className="font-semibold text-green-600">{answeredCount} / {questions.length}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Marked</span>
-                <span className="font-semibold text-orange-600">{markedForReview.size}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Remaining</span>
-                <span className="font-semibold text-gray-800">{questions.length - answeredCount}</span>
-              </div>
-            </div>
-            
-            {/* Progress Bar */}
-            <div className="mt-3">
-              <div className="bg-gray-200 rounded-full h-2">
-                <div 
-                  className="bg-green-500 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${(answeredCount / questions.length) * 100}%` }}
-                ></div>
-              </div>
-              <p className="text-sm text-gray-600 mt-1 text-center font-medium">
-                {Math.round((answeredCount / questions.length) * 100)}% Complete
-              </p>
-            </div>
-          </div>
-
-          {/* Instructions Card */}
-          <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg shadow-md">
-            <h4 className="text-base font-bold text-yellow-800 mb-3">Instructions</h4>
-            <ul className="text-sm text-yellow-700 space-y-1">
-              <li>• Select one option per question</li>
-              <li>• Use Mark for Review for later</li>
-              <li>• Clear Response to deselect</li>
-              <li>• Please do not change Tab while attending quizz, or quizz will be locked</li>
-              <li>• Submit when ready</li>
-            </ul>
           </div>
         </div>
       </div>
