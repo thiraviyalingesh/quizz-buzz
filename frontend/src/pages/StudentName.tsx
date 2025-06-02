@@ -18,11 +18,11 @@ const StudentName: React.FC = () => {
   const selectedQuiz = localStorage.getItem('selectedQuiz') || 'Unknown Quiz';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
       <div className="bg-white p-8 rounded-xl shadow-2xl w-96">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Student Information</h1>
-          <p className="text-gray-600 mb-2">Quiz: <span className="font-semibold text-indigo-600">{selectedQuiz}</span></p>
+          <p className="text-gray-600 mb-2">Quiz: <span className="font-semibold text-blue-600">{selectedQuiz}</span></p>
         </div>
         
         <div className="space-y-6">
@@ -34,7 +34,7 @@ const StudentName: React.FC = () => {
               type="text"
               value={studentName}
               onChange={(e) => setStudentName(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="e.g., John Doe"
               onKeyPress={(e) => e.key === 'Enter' && handleStartQuiz()}
             />
@@ -46,7 +46,7 @@ const StudentName: React.FC = () => {
             className={`w-full py-3 rounded-lg font-semibold transition duration-200 ${
               !studentName.trim()
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-indigo-600 hover:bg-indigo-700 text-white'
+                : 'bg-blue-600 hover:bg-blue-700 text-white'
             }`}
           >
             🚀 Start Quiz

@@ -55,7 +55,7 @@ const JsonUpload: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
       <div className="bg-white p-8 rounded-xl shadow-2xl w-96">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Upload Quiz JSON</h1>
@@ -71,10 +71,10 @@ const JsonUpload: React.FC = () => {
               type="file"
               accept=".json"
               onChange={handleFileChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             {jsonFile && (
-              <p className="mt-2 text-sm text-green-600">
+              <p className="mt-2 text-sm text-blue-600">
                 ✅ Selected: {jsonFile.name}
               </p>
             )}
@@ -86,7 +86,7 @@ const JsonUpload: React.FC = () => {
             className={`w-full py-3 rounded-lg font-semibold transition duration-200 ${
               !jsonFile || isLoading
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-green-600 hover:bg-green-700 text-white'
+                : 'bg-blue-600 hover:bg-blue-700 text-white'
             }`}
           >
             {isLoading ? '⏳ Uploading...' : '📤 Upload Quiz'}
