@@ -16,7 +16,9 @@ app.add_middleware(
 )
 
 # Get the parent directory (where the image folders are located)
-parent_dir = Path(__file__).parent.parent
+# parent_dir = Path(__file__).parent.parent
+parent_dir = Path(__file__).parent.parent / "frontend"
+
 
 # Mount static files for serving images
 quiz_folders = [
