@@ -9,6 +9,9 @@ interface StudentResult {
   timeSpent: string;
   completedAt: string;
   markedQuestions: number;
+  points?: number;
+  streak?: number;
+  badges?: string[];
 }
 
 const TeacherPanel: React.FC = () => {
@@ -49,7 +52,6 @@ const TeacherPanel: React.FC = () => {
   const handleBackToQuiz = () => {
     navigate('/select-quiz');
   };
-
   if (!selectedStudent) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
@@ -70,18 +72,18 @@ const TeacherPanel: React.FC = () => {
   const stats = generateDemoStats(selectedStudent);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 p-4 md:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-          <div className="flex justify-between items-center">
+        <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-4 md:mb-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0">
             <div>
-              <h1 className="text-3xl font-bold text-gray-800">Teacher Analytics Panel</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Teacher Analytics Panel</h1>
               <p className="text-gray-600 mt-1">Student Performance Dashboard</p>
             </div>
             <button
               onClick={handleBackToQuiz}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
+              className="w-full md:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
             >
               New Quiz Session
             </button>
@@ -89,9 +91,9 @@ const TeacherPanel: React.FC = () => {
         </div>
 
         {/* Student Info Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
           {/* Student Details */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
             <h3 className="text-lg font-bold text-gray-800 mb-4">Student Information</h3>
             <div className="space-y-3">
               <div>
@@ -108,9 +110,8 @@ const TeacherPanel: React.FC = () => {
               </div>
             </div>
           </div>
-
           {/* Performance Overview */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
             <h3 className="text-lg font-bold text-gray-800 mb-4">Performance Overview</h3>
             <div className="space-y-3">
               <div>
@@ -128,30 +129,33 @@ const TeacherPanel: React.FC = () => {
             </div>
           </div>
 
-          {/* Time Analysis */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Time Analysis</h3>
+          {/* Gamification Stats */}
+          <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-xl shadow-lg p-4 md:p-6">
+            <h3 className="text-lg font-bold text-purple-800 mb-4">Gamification Stats</h3>
             <div className="space-y-3">
               <div>
-                <span className="text-sm text-gray-600">Time Spent:</span>
-                <p className="font-semibold text-gray-800">{selectedStudent.timeSpent}</p>
+                <span className="text-sm text-purple-600">Points Earned:</span>
+                <p className="font-semibold text-purple-800 text-xl">{selectedStudent.points || 0} 🌟</p>
               </div>
               <div>
-                <span className="text-sm text-gray-600">Speed:</span>
-                <p className="font-semibold text-purple-600">{stats.speed}</p>
+                <span className="text-sm text-purple-600">Quiz Streak:</span>
+                <p className="font-semibold text-purple-800">{selectedStudent.streak || 0} 🔥</p>
               </div>
               <div>
-                <span className="text-sm text-gray-600">Avg per Question:</span>
-                <p className="font-semibold text-gray-800">45 seconds</p>
+                <span className="text-sm text-purple-600">Achievement Level:</span>
+                <p className="font-semibold text-purple-800">
+                  {(selectedStudent.points || 0) >= 200 ? 'Expert' : 
+                   (selectedStudent.points || 0) >= 100 ? 'Advanced' : 'Beginner'}
+                </p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Visual Analytics */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
           {/* Progress Chart */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
             <h3 className="text-lg font-bold text-gray-800 mb-4">Question Progress</h3>
             <div className="space-y-4">
               <div>
@@ -165,8 +169,7 @@ const TeacherPanel: React.FC = () => {
                     style={{ width: `${(selectedStudent.questionsAnswered / selectedStudent.totalQuestions) * 100}%` }}
                   ></div>
                 </div>
-              </div>
-              
+              </div>              
               <div>
                 <div className="flex justify-between text-sm mb-1">
                   <span>Marked for Review</span>
@@ -196,7 +199,7 @@ const TeacherPanel: React.FC = () => {
           </div>
 
           {/* Topic-wise Analysis */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
             <h3 className="text-lg font-bold text-gray-800 mb-4">Topic-wise Performance (Demo)</h3>
             <div className="space-y-4">
               <div>
@@ -240,30 +243,29 @@ const TeacherPanel: React.FC = () => {
             </div>
           </div>
         </div>
-
         {/* Difficulty Analysis */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-4 md:mb-6">
           <h3 className="text-lg font-bold text-gray-800 mb-4">Difficulty Level Analysis (Demo)</h3>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 gap-4 md:gap-6">
             <div className="text-center">
-              <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl font-bold text-green-600">{stats.difficulty.easy}</span>
+              <div className="bg-green-100 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl md:text-2xl font-bold text-green-600">{stats.difficulty.easy}</span>
               </div>
               <h4 className="font-semibold text-gray-800">Easy Questions</h4>
               <p className="text-sm text-gray-600">Attempted</p>
             </div>
             
             <div className="text-center">
-              <div className="bg-yellow-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl font-bold text-yellow-600">{stats.difficulty.medium}</span>
+              <div className="bg-yellow-100 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl md:text-2xl font-bold text-yellow-600">{stats.difficulty.medium}</span>
               </div>
               <h4 className="font-semibold text-gray-800">Medium Questions</h4>
               <p className="text-sm text-gray-600">Attempted</p>
             </div>
             
             <div className="text-center">
-              <div className="bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-2xl font-bold text-red-600">{stats.difficulty.hard}</span>
+              <div className="bg-red-100 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl md:text-2xl font-bold text-red-600">{stats.difficulty.hard}</span>
               </div>
               <h4 className="font-semibold text-gray-800">Hard Questions</h4>
               <p className="text-sm text-gray-600">Attempted</p>
@@ -272,8 +274,8 @@ const TeacherPanel: React.FC = () => {
         </div>
 
         {/* Demo Notice */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
-          <div className="flex items-center">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 md:p-6">
+          <div className="flex items-start">
             <div className="flex-shrink-0">
               <span className="text-2xl">⚠️</span>
             </div>
