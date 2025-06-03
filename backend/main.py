@@ -1,73 +1,160 @@
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
+
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import os
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+from typing import List, Dict
 from pathlib import Path
+import json
+from datetime import datetime
 
-app = FastAPI(title="Quiz Image Server", version="1.0.0")
+app = FastAPI()
 
-# Enable CORS for React frontend
+# CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React dev server
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Get the parent directory (where the image folders are located)
-# parent_dir = Path(__file__).parent.parent
-parent_dir = Path(__file__).parent.parent / "frontend"
+# Mount static files
+static_path = Path(__file__).parent.parent / "frontend" / "NEET-2025-Code-48_extracted_images"
+if static_path.exists():
+    app.mount("/NEET-2025-Code-48_extracted_images", StaticFiles(directory=str(static_path)), name="images")
+else:
+    print(f"❌ Static image folder not found: {static_path}")
 
+# Models
+class StudentAnswer(BaseModel):
+    questionNumber: int
+    selectedOption: int
+    timeSpent: float
+    isMarked: bool = False
 
-# Mount static files for serving images
-quiz_folders = [
-    "NEET-2025-Code-48_extracted_images",
-    # Add more quiz image folders here as needed
-]
+class QuizSubmission(BaseModel):
+    studentName: str
+    studentEmail: str
+    quizName: str
+    answers: List[StudentAnswer]
+    totalTimeSpent: str
+    submittedAt: str
 
-mounted_folders = []
-for folder in quiz_folders:
-    folder_path = parent_dir / folder
-    if folder_path.exists():
-        app.mount(f"/{folder}", StaticFiles(directory=str(folder_path)), name=folder.replace('-', '_'))
-        mounted_folders.append(folder)
-        print(f"✅ Mounted: /{folder} -> {folder_path}")
-        
-        # List files in the folder for debugging
-        files = list(folder_path.glob("*"))
-        print(f"   📁 Files found: {[f.name for f in files[:5]]}...")
-    else:
-        print(f"❌ Folder not found: {folder_path}")
+class QuestionResult(BaseModel):
+    questionNumber: int
+    questionText: str
+    selectedOption: int
+    correctAnswer: str
+    isCorrect: bool
+    timeSpent: float
+    isMarked: bool
+    options: List[str]
 
-@app.get("/")
-def read_root():
+class StudentResult(BaseModel):
+    studentName: str
+    studentEmail: str
+    quizName: str
+    totalQuestions: int
+    answeredQuestions: int
+    correctAnswers: int
+    score: float
+    timeSpent: str
+    submittedAt: str
+    detailedResults: List[QuestionResult]
+
+# In-memory storage
+student_results: List[StudentResult] = []
+results_file = Path("student_results.json")
+
+@app.on_event("startup")
+def load_results():
+    if results_file.exists():
+        with open(results_file, "r", encoding="utf-8") as f:
+            for r in json.load(f):
+                for d in r["detailedResults"]:
+                    if isinstance(d["correctAnswer"], int):
+                        d["correctAnswer"] = ["A", "B", "C", "D"][d["correctAnswer"]]
+                student_results.append(StudentResult(**r))
+
+def save_results():
+    with open(results_file, "w", encoding="utf-8") as f:
+        json.dump([r.dict() for r in student_results], f, indent=2)
+
+# Load questions
+def load_quiz_questions(quiz_name: str):
+    path = Path(__file__).parent.parent / "frontend" / f"{quiz_name}.json"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Quiz not found")
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+# Scoring logic with A/B/C/D comparison
+def calculate_score(answers: List[StudentAnswer], questions: List[Dict]):
+    q_map = {q["questionNumber"]: q for q in questions}
+    correct = 0
+    details = []
+
+    for a in answers:
+        q = q_map.get(a.questionNumber)
+        if not q:
+            continue
+
+        correct_raw = q.get("correct_answer", "X")
+        correct_letter = (
+            ["A", "B", "C", "D"][correct_raw] if isinstance(correct_raw, int) else correct_raw
+        )
+        selected_letter = ["A", "B", "C", "D"][a.selectedOption] if 0 <= a.selectedOption <= 3 else "X"
+        is_correct = correct_letter == selected_letter
+
+        details.append({
+            "questionNumber": a.questionNumber,
+            "questionText": q.get("questionText", ""),
+            "selectedOption": a.selectedOption,
+            "correctAnswer": correct_letter,
+            "isCorrect": is_correct,
+            "timeSpent": a.timeSpent,
+            "isMarked": a.isMarked,
+            "options": q.get("option_with_images_", [])
+        })
+
     return {
-        "message": "Quiz Image Server is running! 🚀",
-        "mounted_folders": mounted_folders,
-        "example_urls": [
-            f"http://localhost:8000/{folder}/q3_diagram.png.png"
-            for folder in mounted_folders
-        ],
-        "note": "Check file extensions - some files have .png.png"
+        "correct": correct,
+        "total": len(questions),
+        "details": details
     }
 
-@app.get("/list/{folder_name}")
-def list_files(folder_name: str):
-    """List all files in a specific folder for debugging"""
-    folder_path = parent_dir / folder_name
-    if not folder_path.exists():
-        return {"error": f"Folder {folder_name} not found"}
-    
-    files = [f.name for f in folder_path.iterdir() if f.is_file()]
-    return {"folder": folder_name, "files": files}
+@app.post("/quiz/submit")
+def submit_quiz(data: QuizSubmission):
+    questions = load_quiz_questions(data.quizName)
+    score_data = calculate_score(data.answers, questions)
 
-@app.get("/health")
-def health_check():
-    return {"status": "healthy", "server": "Quiz Image Server"}
+    result = StudentResult(
+        studentName=data.studentName,
+        studentEmail=data.studentEmail,
+        quizName=data.quizName,
+        totalQuestions=score_data["total"],
+        answeredQuestions=len(data.answers),
+        correctAnswers=score_data["correct"],
+        score=round((score_data["correct"] / score_data["total"]) * 100, 2),
+        timeSpent=data.totalTimeSpent,
+        submittedAt=data.submittedAt,
+        detailedResults=score_data["details"]
+    )
 
-if __name__ == "__main__":
-    import uvicorn
-    print("🚀 Starting Quiz Image Server...")
-    print(f"📁 Working directory: {parent_dir}")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    student_results.append(result)
+    save_results()
+
+    return {"message": "✅ Submission received", "score": result.score}
+
+@app.get("/teacher/results")
+def get_all_results():
+    return {
+        "results": student_results,
+        "totalStudents": len(student_results),
+        "summary": {
+            "averageScore": round(
+                sum(r.score for r in student_results) / len(student_results), 2
+            ) if student_results else 0
+        }
+    }
