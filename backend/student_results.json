@@ -1944,5 +1944,61 @@
         ]
       }
     ]
+  },
+  {
+    "studentName": "xaA",
+    "studentEmail": "info@buzztrackers.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 1,
+    "correctAnswers": 0,
+    "score": 0.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-03T11:47:47.688Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      }
+    ]
+  },
+  {
+    "studentName": "xaA",
+    "studentEmail": "info@buzztrackers.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 1,
+    "correctAnswers": 0,
+    "score": 0.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-03T11:47:47.688Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      }
+    ]
   }
 ]
