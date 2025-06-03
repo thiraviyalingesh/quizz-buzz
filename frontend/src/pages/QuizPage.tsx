@@ -106,6 +106,22 @@ const QuizPage: React.FC = () => {
   };
 
   const handleSubmitQuiz = () => {
+    const quizSubmissionData = {
+      studentName: localStorage.getItem('studentName') || 'Unknown',
+      studentEmail: localStorage.getItem('studentEmail') || 'demo@example.com',
+      quizName: localStorage.getItem('selectedQuiz') || 'Unknown Quiz',
+      answers: Object.entries(answers).map(([qNum, option]) => ({
+        questionNumber: parseInt(qNum),
+        selectedOption: option.charCodeAt(0) - 65,
+        timeSpent: 10, // Placeholder or add real tracking
+        isMarked: markedForReview.has(parseInt(qNum))
+      })),
+      totalTimeSpent: "00:10:00",  // You can replace with actual timer
+      submittedAt: new Date().toISOString()
+    };
+
+    localStorage.setItem("quizSubmissionData", JSON.stringify(quizSubmissionData));
+
     if (window.confirm('Are you sure you want to submit the quiz?')) {
       // Gamification: Calculate bonus points
       let bonusPoints = 0;
@@ -577,3 +593,4 @@ const QuizPage: React.FC = () => {
 };
 
 export default QuizPage;
+// PATCHED ✅ to store quizSubmissionData to localStorage

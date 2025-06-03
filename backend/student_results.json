@@ -1,0 +1,350 @@
+[
+  {
+    "studentName": "vc",
+    "studentEmail": "demo@example.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 3,
+    "correctAnswers": 2,
+    "score": 20.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-03T06:18:06.763Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 0,
+        "correctAnswer": "C",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "questionText": "An electric dipole with dipole moment 5 \u00d7 10\u20136 Cm is aligned with the direction of a uniform electric field of magnitude 4 \u00d7 105 N/C. The dipole is then rotated through an angle of 60\u00b0 with respect to the electric field. The change in the potential energy of the dipole is:",
+        "selectedOption": 3,
+        "correctAnswer": "D",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1.2 J",
+          "(2) 1.5 J",
+          "(3) 0.8 J",
+          "(4) 1.0 J"
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 0",
+          "(2) 84 NS",
+          "(3) 21 NS",
+          "(4) 7 NS"
+        ]
+      }
+    ]
+  },
+  {
+    "studentName": "vc",
+    "studentEmail": "demo@example.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 3,
+    "correctAnswers": 2,
+    "score": 20.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-03T06:18:06.763Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 0,
+        "correctAnswer": "C",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "questionText": "An electric dipole with dipole moment 5 \u00d7 10\u20136 Cm is aligned with the direction of a uniform electric field of magnitude 4 \u00d7 105 N/C. The dipole is then rotated through an angle of 60\u00b0 with respect to the electric field. The change in the potential energy of the dipole is:",
+        "selectedOption": 3,
+        "correctAnswer": "D",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1.2 J",
+          "(2) 1.5 J",
+          "(3) 0.8 J",
+          "(4) 1.0 J"
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 0",
+          "(2) 84 NS",
+          "(3) 21 NS",
+          "(4) 7 NS"
+        ]
+      }
+    ]
+  },
+  {
+    "studentName": "vc",
+    "studentEmail": "demo@example.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 3,
+    "correctAnswers": 2,
+    "score": 20.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-03T06:18:06.763Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 0,
+        "correctAnswer": "C",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "questionText": "An electric dipole with dipole moment 5 \u00d7 10\u20136 Cm is aligned with the direction of a uniform electric field of magnitude 4 \u00d7 105 N/C. The dipole is then rotated through an angle of 60\u00b0 with respect to the electric field. The change in the potential energy of the dipole is:",
+        "selectedOption": 3,
+        "correctAnswer": "D",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1.2 J",
+          "(2) 1.5 J",
+          "(3) 0.8 J",
+          "(4) 1.0 J"
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 0",
+          "(2) 84 NS",
+          "(3) 21 NS",
+          "(4) 7 NS"
+        ]
+      }
+    ]
+  },
+  {
+    "studentName": "vc",
+    "studentEmail": "demo@example.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 3,
+    "correctAnswers": 2,
+    "score": 20.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-03T06:18:06.763Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 0,
+        "correctAnswer": "C",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "questionText": "An electric dipole with dipole moment 5 \u00d7 10\u20136 Cm is aligned with the direction of a uniform electric field of magnitude 4 \u00d7 105 N/C. The dipole is then rotated through an angle of 60\u00b0 with respect to the electric field. The change in the potential energy of the dipole is:",
+        "selectedOption": 3,
+        "correctAnswer": "D",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1.2 J",
+          "(2) 1.5 J",
+          "(3) 0.8 J",
+          "(4) 1.0 J"
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 0",
+          "(2) 84 NS",
+          "(3) 21 NS",
+          "(4) 7 NS"
+        ]
+      }
+    ]
+  },
+  {
+    "studentName": "d",
+    "studentEmail": "demo@example.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 3,
+    "correctAnswers": 0,
+    "score": 0.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-03T07:28:10.129Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "questionText": "An electric dipole with dipole moment 5 \u00d7 10\u20136 Cm is aligned with the direction of a uniform electric field of magnitude 4 \u00d7 105 N/C. The dipole is then rotated through an angle of 60\u00b0 with respect to the electric field. The change in the potential energy of the dipole is:",
+        "selectedOption": 3,
+        "correctAnswer": "D",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1.2 J",
+          "(2) 1.5 J",
+          "(3) 0.8 J",
+          "(4) 1.0 J"
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 0",
+          "(2) 84 NS",
+          "(3) 21 NS",
+          "(4) 7 NS"
+        ]
+      }
+    ]
+  },
+  {
+    "studentName": "d",
+    "studentEmail": "demo@example.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 3,
+    "correctAnswers": 0,
+    "score": 0.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-03T07:28:10.129Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "questionText": "An electric dipole with dipole moment 5 \u00d7 10\u20136 Cm is aligned with the direction of a uniform electric field of magnitude 4 \u00d7 105 N/C. The dipole is then rotated through an angle of 60\u00b0 with respect to the electric field. The change in the potential energy of the dipole is:",
+        "selectedOption": 3,
+        "correctAnswer": "D",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1.2 J",
+          "(2) 1.5 J",
+          "(3) 0.8 J",
+          "(4) 1.0 J"
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 0",
+          "(2) 84 NS",
+          "(3) 21 NS",
+          "(4) 7 NS"
+        ]
+      }
+    ]
+  }
+]

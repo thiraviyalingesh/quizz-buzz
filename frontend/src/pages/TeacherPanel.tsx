@@ -1,67 +1,57 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+interface QuestionDetail {
+  questionNumber: number;
+  questionText: string;
+  selectedOption: number;
+  correctAnswer: number;
+  isCorrect: boolean;
+  timeSpent: number;
+  isMarked: boolean;
+  options: string[];
+}
 
 interface StudentResult {
   studentName: string;
+  studentEmail: string;
   quizName: string;
-  questionsAnswered: number;
   totalQuestions: number;
+  answeredQuestions: number;
+  correctAnswers: number;
+  score: number;
   timeSpent: string;
-  completedAt: string;
-  markedQuestions: number;
-  points?: number;
-  streak?: number;
-  badges?: string[];
+  submittedAt: string;
+  detailedResults: QuestionDetail[];
 }
 
 const TeacherPanel: React.FC = () => {
-  const [studentResults, setStudentResults] = useState<StudentResult[]>([]);
-  const [selectedStudent, setSelectedStudent] = useState<StudentResult | null>(null);
+  const [results, setResults] = useState<StudentResult[]>([]);
+  const [selected, setSelected] = useState<StudentResult | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Load student results from localStorage
-    const results = JSON.parse(localStorage.getItem('studentResults') || '[]');
-    setStudentResults(results);
-    
-    // If there are results, select the most recent one
-    if (results.length > 0) {
-      setSelectedStudent(results[results.length - 1]);
-    }
+    axios.get("http://localhost:8000/teacher/results")
+      .then(res => {
+        const data: StudentResult[] = res.data.results;
+        setResults(data);
+        if (data.length > 0) setSelected(data[data.length - 1]);
+      })
+      .catch(err => {
+        console.error("❌ Failed to load results", err);
+      });
   }, []);
 
-  const generateDemoStats = (student: StudentResult) => {
-    const percentage = Math.round((student.questionsAnswered / student.totalQuestions) * 100);
-    
-    return {
-      accuracy: percentage,
-      speed: Math.random() > 0.5 ? 'Fast' : 'Average',
-      difficulty: {
-        easy: Math.floor(Math.random() * 4) + 1,
-        medium: Math.floor(Math.random() * 4) + 1,
-        hard: Math.floor(Math.random() * 3) + 1,
-      },
-      topicWise: {
-        physics: Math.floor(Math.random() * 60) + 40,
-        chemistry: Math.floor(Math.random() * 60) + 40,
-        biology: Math.floor(Math.random() * 60) + 40,
-      }
-    };
-  };
+  const goBack = () => navigate("/select-quiz");
 
-  const handleBackToQuiz = () => {
-    navigate('/select-quiz');
-  };
-  if (!selectedStudent) {
+  if (!selected) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-xl shadow-2xl w-96 text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Teacher Panel</h1>
-          <p className="text-gray-600 mb-6">No student results found.</p>
-          <button
-            onClick={handleBackToQuiz}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
-          >
+      <div className="min-h-screen flex items-center justify-center bg-blue-600 text-white">
+        <div className="text-center bg-white text-gray-800 p-6 rounded-xl shadow-lg">
+          <h2 className="text-xl font-bold mb-2">Teacher Panel</h2>
+          <p>No student results found.</p>
+          <button onClick={goBack} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg">
             Back to Quiz Selection
           </button>
         </div>
@@ -69,223 +59,34 @@ const TeacherPanel: React.FC = () => {
     );
   }
 
-  const stats = generateDemoStats(selectedStudent);
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 p-4 md:p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-4 md:mb-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0">
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Teacher Analytics Panel</h1>
-              <p className="text-gray-600 mt-1">Student Performance Dashboard</p>
-            </div>
-            <button
-              onClick={handleBackToQuiz}
-              className="w-full md:w-auto bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
-            >
-              New Quiz Session
-            </button>
-          </div>
+    <div className="min-h-screen bg-blue-50 p-6">
+      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6">
+        <h1 className="text-2xl font-bold mb-4">📊 Teacher Panel</h1>
+        <div className="mb-4">
+          <p><strong>Name:</strong> {selected.studentName}</p>
+          <p><strong>Email:</strong> {selected.studentEmail}</p>
+          <p><strong>Quiz:</strong> {selected.quizName}</p>
+          <p><strong>Score:</strong> {selected.score}%</p>
+          <p><strong>Correct:</strong> {selected.correctAnswers} / {selected.totalQuestions}</p>
+          <p><strong>Time:</strong> {selected.timeSpent}</p>
+          <p><strong>Submitted:</strong> {selected.submittedAt}</p>
         </div>
-
-        {/* Student Info Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
-          {/* Student Details */}
-          <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Student Information</h3>
-            <div className="space-y-3">
-              <div>
-                <span className="text-sm text-gray-600">Name:</span>
-                <p className="font-semibold text-gray-800">{selectedStudent.studentName}</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600">Quiz:</span>
-                <p className="font-semibold text-gray-800">{selectedStudent.quizName}</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600">Completed:</span>
-                <p className="font-semibold text-gray-800">{selectedStudent.completedAt}</p>
-              </div>
-            </div>
-          </div>
-          {/* Performance Overview */}
-          <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Performance Overview</h3>
-            <div className="space-y-3">
-              <div>
-                <span className="text-sm text-gray-600">Questions Answered:</span>
-                <p className="font-semibold text-green-600">{selectedStudent.questionsAnswered} / {selectedStudent.totalQuestions}</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600">Completion Rate:</span>
-                <p className="font-semibold text-blue-600">{stats.accuracy}%</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600">Marked for Review:</span>
-                <p className="font-semibold text-orange-600">{selectedStudent.markedQuestions}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Gamification Stats */}
-          <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-xl shadow-lg p-4 md:p-6">
-            <h3 className="text-lg font-bold text-purple-800 mb-4">Gamification Stats</h3>
-            <div className="space-y-3">
-              <div>
-                <span className="text-sm text-purple-600">Points Earned:</span>
-                <p className="font-semibold text-purple-800 text-xl">{selectedStudent.points || 0} 🌟</p>
-              </div>
-              <div>
-                <span className="text-sm text-purple-600">Quiz Streak:</span>
-                <p className="font-semibold text-purple-800">{selectedStudent.streak || 0} 🔥</p>
-              </div>
-              <div>
-                <span className="text-sm text-purple-600">Achievement Level:</span>
-                <p className="font-semibold text-purple-800">
-                  {(selectedStudent.points || 0) >= 200 ? 'Expert' : 
-                   (selectedStudent.points || 0) >= 100 ? 'Advanced' : 'Beginner'}
+        <div>
+          <h2 className="text-xl font-semibold mb-2">Answer Breakdown</h2>
+          <ul className="space-y-3">
+            {selected.detailedResults.map((q, idx) => (
+              <li key={idx} className="border p-3 rounded-md bg-gray-50">
+                <p><strong>Q{q.questionNumber}:</strong> {q.questionText}</p>
+                <p>
+                  Student Answer: <span className={q.isCorrect ? "text-green-600" : "text-red-600"}>
+                    {q.selectedOption + 1} ({q.isCorrect ? "✅" : "❌"})
+                  </span>
                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Visual Analytics */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
-          {/* Progress Chart */}
-          <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Question Progress</h3>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Answered</span>
-                  <span>{selectedStudent.questionsAnswered}/{selectedStudent.totalQuestions}</span>
-                </div>
-                <div className="bg-gray-200 rounded-full h-3">
-                  <div 
-                    className="bg-green-500 h-3 rounded-full transition-all duration-300"
-                    style={{ width: `${(selectedStudent.questionsAnswered / selectedStudent.totalQuestions) * 100}%` }}
-                  ></div>
-                </div>
-              </div>              
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Marked for Review</span>
-                  <span>{selectedStudent.markedQuestions}</span>
-                </div>
-                <div className="bg-gray-200 rounded-full h-3">
-                  <div 
-                    className="bg-orange-500 h-3 rounded-full transition-all duration-300"
-                    style={{ width: `${(selectedStudent.markedQuestions / selectedStudent.totalQuestions) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Not Attempted</span>
-                  <span>{selectedStudent.totalQuestions - selectedStudent.questionsAnswered}</span>
-                </div>
-                <div className="bg-gray-200 rounded-full h-3">
-                  <div 
-                    className="bg-red-500 h-3 rounded-full transition-all duration-300"
-                    style={{ width: `${((selectedStudent.totalQuestions - selectedStudent.questionsAnswered) / selectedStudent.totalQuestions) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Topic-wise Analysis */}
-          <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Topic-wise Performance (Demo)</h3>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Physics</span>
-                  <span>{stats.topicWise.physics}%</span>
-                </div>
-                <div className="bg-gray-200 rounded-full h-3">
-                  <div 
-                    className="bg-blue-500 h-3 rounded-full transition-all duration-300"
-                    style={{ width: `${stats.topicWise.physics}%` }}
-                  ></div>
-                </div>
-              </div>
-              
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Chemistry</span>
-                  <span>{stats.topicWise.chemistry}%</span>
-                </div>
-                <div className="bg-gray-200 rounded-full h-3">
-                  <div 
-                    className="bg-purple-500 h-3 rounded-full transition-all duration-300"
-                    style={{ width: `${stats.topicWise.chemistry}%` }}
-                  ></div>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Biology</span>
-                  <span>{stats.topicWise.biology}%</span>
-                </div>
-                <div className="bg-gray-200 rounded-full h-3">
-                  <div 
-                    className="bg-green-500 h-3 rounded-full transition-all duration-300"
-                    style={{ width: `${stats.topicWise.biology}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Difficulty Analysis */}
-        <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-4 md:mb-6">
-          <h3 className="text-lg font-bold text-gray-800 mb-4">Difficulty Level Analysis (Demo)</h3>
-          <div className="grid grid-cols-3 gap-4 md:gap-6">
-            <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-xl md:text-2xl font-bold text-green-600">{stats.difficulty.easy}</span>
-              </div>
-              <h4 className="font-semibold text-gray-800">Easy Questions</h4>
-              <p className="text-sm text-gray-600">Attempted</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-yellow-100 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-xl md:text-2xl font-bold text-yellow-600">{stats.difficulty.medium}</span>
-              </div>
-              <h4 className="font-semibold text-gray-800">Medium Questions</h4>
-              <p className="text-sm text-gray-600">Attempted</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-red-100 w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                <span className="text-xl md:text-2xl font-bold text-red-600">{stats.difficulty.hard}</span>
-              </div>
-              <h4 className="font-semibold text-gray-800">Hard Questions</h4>
-              <p className="text-sm text-gray-600">Attempted</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Demo Notice */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 md:p-6">
-          <div className="flex items-start">
-            <div className="flex-shrink-0">
-              <span className="text-2xl">⚠️</span>
-            </div>
-            <div className="ml-3">
-              <h3 className="text-lg font-semibold text-yellow-800">Demo Analytics</h3>
-              <p className="text-yellow-700">
-                This is a demonstration of the analytics panel. Actual answer analysis and detailed performance metrics will be added when the answer module is implemented.
-              </p>
-            </div>
-          </div>
+                <p>Correct Answer: {q.correctAnswer + 1}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
