@@ -1,0 +1,33 @@
+# Git files
+.git
+.gitignore
+
+# Node modules (will be reinstalled during build)
+frontend/node_modules
+
+# Python cache
+backend/__pycache__
+backend/venv
+
+# Development files
+*.md
+README*
+
+# IDE files
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker files (not needed in image)
+docker-compose.yml
+Dockerfile
+
+# Development data (will be mounted)
+data/
+student_results.json

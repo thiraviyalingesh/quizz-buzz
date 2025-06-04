@@ -6,9 +6,21 @@ from pydantic import BaseModel
 from typing import List, Dict
 from pathlib import Path
 import json
+import os
 from datetime import datetime
 
+
 app = FastAPI()
+
+# Configuration
+DATA_DIR = Path(os.getenv("DATA_DIR", "/app/data"))
+QUIZ_DIR = Path(os.getenv("QUIZ_DIR", "/app/quiz_data"))
+IMAGES_DIR = Path(os.getenv("IMAGES_DIR", "/app/images"))
+
+# Ensure directories exist
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+QUIZ_DIR.mkdir(parents=True, exist_ok=True)
+IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 # CORS
 app.add_middleware(
@@ -21,11 +33,17 @@ app.add_middleware(
 )
 
 # Mount static files
-static_path = Path(__file__).parent.parent / "frontend" / "NEET-2025-Code-48_extracted_images"
-if static_path.exists():
-    app.mount("/NEET-2025-Code-48_extracted_images", StaticFiles(directory=str(static_path)), name="images")
+if IMAGES_DIR.exists():
+    app.mount("/NEET-2025-Code-48_extracted_images", StaticFiles(directory=str(IMAGES_DIR)), name="images")
 else:
-    print(f"❌ Static image folder not found: {static_path}")
+    print(f"❌ Static image folder not found: {IMAGES_DIR}")
+    # Fallback to original path for development
+    static_path = Path(__file__).parent.parent / "frontend" / "NEET-2025-Code-48_extracted_images"
+    if static_path.exists():
+        app.mount("/NEET-2025-Code-48_extracted_images", StaticFiles(directory=str(static_path)), name="images")
+        print(f"✅ Using fallback image path: {static_path}")
+    else:
+        print(f"❌ Fallback image folder also not found: {static_path}")
 
 # Models
 class StudentAnswer(BaseModel):
@@ -66,7 +84,7 @@ class StudentResult(BaseModel):
 
 # In-memory storage
 student_results: List[StudentResult] = []
-results_file = Path("student_results.json")
+results_file = DATA_DIR / "student_results.json"
 
 @app.on_event("startup")
 def load_results():
@@ -84,9 +102,14 @@ def save_results():
 
 # Load questions
 def load_quiz_questions(quiz_name: str):
-    path = Path(__file__).parent.parent / "frontend" / f"{quiz_name}.json"
+    # Try quiz directory first
+    path = QUIZ_DIR / f"{quiz_name}.json"
     if not path.exists():
-        raise HTTPException(status_code=404, detail="Quiz not found")
+        # Fallback to original path for development
+        path = Path(__file__).parent.parent / "frontend" / f"{quiz_name}.json"
+        if not path.exists():
+            raise HTTPException(status_code=404, detail="Quiz not found")
+    
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
