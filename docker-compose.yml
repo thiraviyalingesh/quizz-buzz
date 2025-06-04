@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  quiz-app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount local data directory to persist student results
+      - ./data:/app/data
+      # Mount quiz JSON files
+      - ./quiz_data:/app/quiz_data
+      # Mount images
+      - ./images:/app/images
+    environment:
+      - DATA_DIR=/app/data
+      - QUIZ_DIR=/app/quiz_data
+      - IMAGES_DIR=/app/images
+    restart: unless-stopped

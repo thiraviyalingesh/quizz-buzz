@@ -1,0 +1,108 @@
+[
+  {
+    "questionNumber": 1,
+    "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+      "(2) Zero between the plates and non-zero outside",
+      "(3) Zero at all places", 
+      "(4) Constant between the plates and zero outside the plates"
+    ]
+  },
+  {
+    "questionNumber": 2,
+    "questionText": "An electric dipole with dipole moment 5 × 10–6 Cm is aligned with the direction of a uniform electric field of magnitude 4 × 105 N/C. The dipole is then rotated through an angle of 60° with respect to the electric field. The change in the potential energy of the dipole is:",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 1.2 J",
+      "(2) 1.5 J", 
+      "(3) 0.8 J",
+      "(4) 1.0 J"
+    ]
+  },  {
+    "questionNumber": 3,
+    "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
+    "question_images": ["NEET-2025-Code-48_extracted_images/q3_diagram.png"],
+    "option_with_images_": [
+      "(1) 0",
+      "(2) 84 NS",
+      "(3) 21 NS", 
+      "(4) 7 NS"
+    ]
+  },
+  {
+    "questionNumber": 4,
+    "questionText": "The intensity of transmitted light when a polaroid sheet, placed between two crossed polaroids at 22.5° from the polarization axis of one of the polaroids, is (I0 is the intensity of polarised light after passing through the first polaroid):",
+    "question_images": ["NEET-2025-Code-48_extracted_images/q4_polaroid_diagram.png"],
+    "option_with_images_": [
+      "(1) I0/8",
+      "(2) I0/16",
+      "(3) I0/2",
+      "(4) I0/4"
+    ]
+  },  {
+    "questionNumber": 5,
+    "questionText": "The kinetic energies of two similar cars A and B are 100 J and 225 J respectively. On applying breaks, car A stops after 1000 m and car B stops after 1500 m. If FA and FB are the forces applied by the breaks on cars A and B respectively, then the ratio of FA/FB is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 1/3",
+      "(2) 1/2",
+      "(3) 3/2",
+      "(4) 2/3"
+    ]
+  },
+  {
+    "questionNumber": 6,
+    "questionText": "The current passing through the battery in the given circuit, is:",
+    "question_images": ["NEET-2025-Code-48_extracted_images/q6_circuit.png"],
+    "option_with_images_": [
+      "(1) 2.5 A",
+      "(2) 1.5 A",
+      "(3) 2.0 A",
+      "(4) 0.5 A"
+    ]
+  },  {
+    "questionNumber": 7,
+    "questionText": "Three identical heat conducting rods are connected in series as shown in the figure. The rods on the sides have thermal conductivity 2K while that in the middle has thermal conductivity K. The left end of the combination is maintained at temperature 3T and the right end at T. The rods are thermally insulated from outside. In steady state, temperature at the left junction is T1 and that at the right junction is T2. The ratio T1/T2 is",
+    "question_images": ["NEET-2025-Code-48_extracted_images/q7_thermal_rods.png"],
+    "option_with_images_": [
+      "(1) 5/3",
+      "(2) 5/4",
+      "(3) 3/2",
+      "(4) 4/3"
+    ]
+  },
+  {
+    "questionNumber": 8,
+    "questionText": "In an oscillating spring mass system, a spring is connected to a box filled with sand. As the box oscillates, sand leaks slowly out of the box vertically so that the average frequency ω(t) and average amplitude A(t) of the system change with time t. Which one of the following options schematically depicts these changes correctly?",
+    "question_images": [],
+    "option_with_images_": [
+      "NEET-2025-Code-48_extracted_images/q8_option1.png",
+      "NEET-2025-Code-48_extracted_images/q8_option2.png",
+      "NEET-2025-Code-48_extracted_images/q8_option3.png",
+      "NEET-2025-Code-48_extracted_images/q8_option4.png"
+    ]
+  },  {
+    "questionNumber": 9,
+    "questionText": "AB is a part of an electrical circuit (see figure). The potential difference 'VA – VB', at the instant when current i = 2 A and is increasing at a rate of 1 amp/second is:",
+    "question_images": ["NEET-2025-Code-48_extracted_images/q9_circuit.png"],
+    "option_with_images_": [
+      "(1) 9 volt",
+      "(2) 10 volt",
+      "(3) 5 volt",
+      "(4) 6 volt"
+    ]
+  },
+  {
+    "questionNumber": 10,
+    "questionText": "A particle of mass m is moving around the origin with a constant force F pulling it towards the origin. If Bohr model is used to describe its motion, the radius of the nth orbit and the particle's speed ν in the orbit depend on n as",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) r ∝ n2/3; ν ∝ n1/3",
+      "(2) r ∝ n4/3; ν ∝ n–1/3",
+      "(3) r ∝ n1/3; ν ∝ n1/3",
+      "(4) r ∝ n1/3; ν ∝ n2/3"
+    ]
+  }
+]
