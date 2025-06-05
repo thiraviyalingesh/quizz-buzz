@@ -21,7 +21,19 @@ const QuizPage: React.FC = () => {
   const [showPointsAnimation, setShowPointsAnimation] = useState(false);
   const navigate = useNavigate();
 
-  const IMAGE_SERVER_BASE = "http://localhost:8000";
+  const IMAGE_SERVER_BASE = window.location.origin;
+  const selectedQuiz = localStorage.getItem('selectedQuiz') || 'Quiz';
+
+  // Function to convert image paths to use the correct quiz folder
+  const getImagePath = (imagePath: string): string => {
+    if (!imagePath) return '';
+    
+    // Extract filename from path (remove any existing folder prefix)
+    const filename = imagePath.split('/').pop() || imagePath;
+    
+    // Return path using current quiz folder
+    return `${IMAGE_SERVER_BASE}/images/${selectedQuiz}/${filename}`;
+  };
 
   useEffect(() => {
     // Load selected quiz
@@ -158,7 +170,6 @@ fetch(`/quiz_data/${selectedQuiz}.json`)
 
   const currentQuestion = questions[currentQuestionIndex];
   const answeredCount = Object.keys(answers).length;
-  const selectedQuiz = localStorage.getItem('selectedQuiz') || 'Quiz';
 
   if (questions.length === 0) {
     return (
@@ -232,10 +243,10 @@ fetch(`/quiz_data/${selectedQuiz}.json`)
                   {currentQuestion.question_images.map((imagePath, index) => (
                     <div key={index} className="border rounded-lg p-2 md:p-3 bg-gray-50 w-full md:w-auto transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
                       <img
-                        src={`${IMAGE_SERVER_BASE}/${imagePath}`}
+                        src={getImagePath(imagePath)}
                         alt={`Diagram ${index + 1}`}
                         className="max-h-48 md:max-h-64 w-full md:w-auto object-contain rounded cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:scale-102"
-                        onClick={() => setSelectedImage(`${IMAGE_SERVER_BASE}/${imagePath}`)}
+                        onClick={() => setSelectedImage(getImagePath(imagePath))}
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
                         }}
@@ -303,12 +314,12 @@ fetch(`/quiz_data/${selectedQuiz}.json`)
                                 {isImageOption ? (
                                   <div className="mt-1">
                                     <img
-                                      src={`${IMAGE_SERVER_BASE}/${option}`}
+                                      src={getImagePath(option)}
                                       alt={`Option ${optionLabel}`}
                                       className="max-h-16 md:max-h-20 object-contain rounded border cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:scale-105"
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        setSelectedImage(`${IMAGE_SERVER_BASE}/${option}`);
+                                        setSelectedImage(getImagePath(option));
                                       }}
                                       onError={(e) => {
                                         e.currentTarget.style.display = 'none';

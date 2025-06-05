@@ -17,7 +17,7 @@ const ResultPage: React.FC = () => {
       const payload = JSON.parse(raw);
       setTotalQuestions(payload.answers.length);
 
-      axios.post("http://localhost:8000/quiz/submit", payload)
+      axios.post(`${window.location.origin}/quiz/submit`, payload)
         .then(res => {
           console.log("✅ Submitted:", res.data);
           setScore(res.data.score);
