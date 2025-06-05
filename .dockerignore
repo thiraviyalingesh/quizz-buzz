@@ -28,6 +28,3 @@ Thumbs.db
 docker-compose.yml
 Dockerfile
 
-# Development data (will be mounted)
-data/
-student_results.json

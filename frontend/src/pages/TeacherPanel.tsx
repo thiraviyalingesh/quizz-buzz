@@ -43,7 +43,7 @@ const TeacherPanel: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8000/teacher/results')
+    fetch(`${window.location.origin}/teacher/results`)
       .then(res => res.json())
       .then(data => {
         if (data.results && data.results.length > 0) {

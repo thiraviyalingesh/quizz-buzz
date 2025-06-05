@@ -1,10 +1,9 @@
-version: '3.8'
 
 services:
   quiz-app:
     build: .
     ports:
-      - "8000:8000"
+      - "8080:8080"
     volumes:
       # Mount local data directory to persist student results
       - ./data:/app/data

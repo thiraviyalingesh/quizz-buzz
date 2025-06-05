@@ -436,5 +436,387 @@
         ]
       }
     ]
+  },
+  {
+    "studentName": "vin",
+    "studentEmail": "info@buzztrackers.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 10,
+    "correctAnswers": 0,
+    "score": 0.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-05T04:08:47.171Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 1,
+        "correctAnswer": "C",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "questionText": "An electric dipole with dipole moment 5 \u00d7 10\u20136 Cm is aligned with the direction of a uniform electric field of magnitude 4 \u00d7 105 N/C. The dipole is then rotated through an angle of 60\u00b0 with respect to the electric field. The change in the potential energy of the dipole is:",
+        "selectedOption": 1,
+        "correctAnswer": "D",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1.2 J",
+          "(2) 1.5 J",
+          "(3) 0.8 J",
+          "(4) 1.0 J"
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 0",
+          "(2) 84 NS",
+          "(3) 21 NS",
+          "(4) 7 NS"
+        ]
+      },
+      {
+        "questionNumber": 4,
+        "questionText": "The intensity of transmitted light when a polaroid sheet, placed between two crossed polaroids at 22.5\u00b0 from the polarization axis of one of the polaroids, is (I0 is the intensity of polarised light after passing through the first polaroid):",
+        "selectedOption": 2,
+        "correctAnswer": "A",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) I0/8",
+          "(2) I0/16",
+          "(3) I0/2",
+          "(4) I0/4"
+        ]
+      },
+      {
+        "questionNumber": 5,
+        "questionText": "The kinetic energies of two similar cars A and B are 100 J and 225 J respectively. On applying breaks, car A stops after 1000 m and car B stops after 1500 m. If FA and FB are the forces applied by the breaks on cars A and B respectively, then the ratio of FA/FB is",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1/3",
+          "(2) 1/2",
+          "(3) 3/2",
+          "(4) 2/3"
+        ]
+      },
+      {
+        "questionNumber": 6,
+        "questionText": "The current passing through the battery in the given circuit, is:",
+        "selectedOption": 2,
+        "correctAnswer": "A",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 2.5 A",
+          "(2) 1.5 A",
+          "(3) 2.0 A",
+          "(4) 0.5 A"
+        ]
+      },
+      {
+        "questionNumber": 7,
+        "questionText": "Three identical heat conducting rods are connected in series as shown in the figure. The rods on the sides have thermal conductivity 2K while that in the middle has thermal conductivity K. The left end of the combination is maintained at temperature 3T and the right end at T. The rods are thermally insulated from outside. In steady state, temperature at the left junction is T1 and that at the right junction is T2. The ratio T1/T2 is",
+        "selectedOption": 2,
+        "correctAnswer": "D",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 5/3",
+          "(2) 5/4",
+          "(3) 3/2",
+          "(4) 4/3"
+        ]
+      },
+      {
+        "questionNumber": 8,
+        "questionText": "In an oscillating spring mass system, a spring is connected to a box filled with sand. As the box oscillates, sand leaks slowly out of the box vertically so that the average frequency \u03c9(t) and average amplitude A(t) of the system change with time t. Which one of the following options schematically depicts these changes correctly?",
+        "selectedOption": 2,
+        "correctAnswer": "A",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "NEET-2025-Code-48_extracted_images/q8_option1.png",
+          "NEET-2025-Code-48_extracted_images/q8_option2.png",
+          "NEET-2025-Code-48_extracted_images/q8_option3.png",
+          "NEET-2025-Code-48_extracted_images/q8_option4.png"
+        ]
+      },
+      {
+        "questionNumber": 9,
+        "questionText": "AB is a part of an electrical circuit (see figure). The potential difference 'VA \u2013 VB', at the instant when current i = 2 A and is increasing at a rate of 1 amp/second is:",
+        "selectedOption": 1,
+        "correctAnswer": "C",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 9 volt",
+          "(2) 10 volt",
+          "(3) 5 volt",
+          "(4) 6 volt"
+        ]
+      },
+      {
+        "questionNumber": 10,
+        "questionText": "A particle of mass m is moving around the origin with a constant force F pulling it towards the origin. If Bohr model is used to describe its motion, the radius of the nth orbit and the particle's speed \u03bd in the orbit depend on n as",
+        "selectedOption": 2,
+        "correctAnswer": "D",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) r \u221d n2/3; \u03bd \u221d n1/3",
+          "(2) r \u221d n4/3; \u03bd \u221d n\u20131/3",
+          "(3) r \u221d n1/3; \u03bd \u221d n1/3",
+          "(4) r \u221d n1/3; \u03bd \u221d n2/3"
+        ]
+      }
+    ]
+  },
+  {
+    "studentName": "il;kl",
+    "studentEmail": "info@buzztrackers.com",
+    "quizName": "NEET-2025-Code-48",
+    "totalQuestions": 10,
+    "answeredQuestions": 9,
+    "correctAnswers": 0,
+    "score": 0.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-05T04:33:08.298Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "questionText": "An electric dipole with dipole moment 5 \u00d7 10\u20136 Cm is aligned with the direction of a uniform electric field of magnitude 4 \u00d7 105 N/C. The dipole is then rotated through an angle of 60\u00b0 with respect to the electric field. The change in the potential energy of the dipole is:",
+        "selectedOption": 2,
+        "correctAnswer": "D",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1.2 J",
+          "(2) 1.5 J",
+          "(3) 0.8 J",
+          "(4) 1.0 J"
+        ]
+      },
+      {
+        "questionNumber": 3,
+        "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 0",
+          "(2) 84 NS",
+          "(3) 21 NS",
+          "(4) 7 NS"
+        ]
+      },
+      {
+        "questionNumber": 5,
+        "questionText": "The kinetic energies of two similar cars A and B are 100 J and 225 J respectively. On applying breaks, car A stops after 1000 m and car B stops after 1500 m. If FA and FB are the forces applied by the breaks on cars A and B respectively, then the ratio of FA/FB is",
+        "selectedOption": 3,
+        "correctAnswer": "C",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1/3",
+          "(2) 1/2",
+          "(3) 3/2",
+          "(4) 2/3"
+        ]
+      },
+      {
+        "questionNumber": 6,
+        "questionText": "The current passing through the battery in the given circuit, is:",
+        "selectedOption": 0,
+        "correctAnswer": "A",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 2.5 A",
+          "(2) 1.5 A",
+          "(3) 2.0 A",
+          "(4) 0.5 A"
+        ]
+      },
+      {
+        "questionNumber": 7,
+        "questionText": "Three identical heat conducting rods are connected in series as shown in the figure. The rods on the sides have thermal conductivity 2K while that in the middle has thermal conductivity K. The left end of the combination is maintained at temperature 3T and the right end at T. The rods are thermally insulated from outside. In steady state, temperature at the left junction is T1 and that at the right junction is T2. The ratio T1/T2 is",
+        "selectedOption": 2,
+        "correctAnswer": "D",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 5/3",
+          "(2) 5/4",
+          "(3) 3/2",
+          "(4) 4/3"
+        ]
+      },
+      {
+        "questionNumber": 8,
+        "questionText": "In an oscillating spring mass system, a spring is connected to a box filled with sand. As the box oscillates, sand leaks slowly out of the box vertically so that the average frequency \u03c9(t) and average amplitude A(t) of the system change with time t. Which one of the following options schematically depicts these changes correctly?",
+        "selectedOption": 2,
+        "correctAnswer": "A",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "NEET-2025-Code-48_extracted_images/q8_option1.png",
+          "NEET-2025-Code-48_extracted_images/q8_option2.png",
+          "NEET-2025-Code-48_extracted_images/q8_option3.png",
+          "NEET-2025-Code-48_extracted_images/q8_option4.png"
+        ]
+      },
+      {
+        "questionNumber": 9,
+        "questionText": "AB is a part of an electrical circuit (see figure). The potential difference 'VA \u2013 VB', at the instant when current i = 2 A and is increasing at a rate of 1 amp/second is:",
+        "selectedOption": 2,
+        "correctAnswer": "C",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 9 volt",
+          "(2) 10 volt",
+          "(3) 5 volt",
+          "(4) 6 volt"
+        ]
+      },
+      {
+        "questionNumber": 10,
+        "questionText": "A particle of mass m is moving around the origin with a constant force F pulling it towards the origin. If Bohr model is used to describe its motion, the radius of the nth orbit and the particle's speed \u03bd in the orbit depend on n as",
+        "selectedOption": 3,
+        "correctAnswer": "D",
+        "isCorrect": true,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) r \u221d n2/3; \u03bd \u221d n1/3",
+          "(2) r \u221d n4/3; \u03bd \u221d n\u20131/3",
+          "(3) r \u221d n1/3; \u03bd \u221d n1/3",
+          "(4) r \u221d n1/3; \u03bd \u221d n2/3"
+        ]
+      }
+    ]
+  },
+  {
+    "studentName": "kghgjhgj",
+    "studentEmail": "info@buzztrackers.com",
+    "quizName": "JEE",
+    "totalQuestions": 10,
+    "answeredQuestions": 2,
+    "correctAnswers": 0,
+    "score": 0.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-05T09:36:01.438Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 2,
+        "correctAnswer": "X",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      },
+      {
+        "questionNumber": 2,
+        "questionText": "An electric dipole with dipole moment 5 \u00d7 10\u20136 Cm is aligned with the direction of a uniform electric field of magnitude 4 \u00d7 105 N/C. The dipole is then rotated through an angle of 60\u00b0 with respect to the electric field. The change in the potential energy of the dipole is:",
+        "selectedOption": 2,
+        "correctAnswer": "X",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) 1.2 J",
+          "(2) 1.5 J",
+          "(3) 0.8 J",
+          "(4) 1.0 J"
+        ]
+      }
+    ]
+  },
+  {
+    "studentName": "joj",
+    "studentEmail": "info@buzztrackers.com",
+    "quizName": "JEE",
+    "totalQuestions": 10,
+    "answeredQuestions": 1,
+    "correctAnswers": 0,
+    "score": 0.0,
+    "timeSpent": "00:10:00",
+    "submittedAt": "2025-06-05T09:48:27.386Z",
+    "detailedResults": [
+      {
+        "questionNumber": 1,
+        "questionText": "A parallel plate capacitor made of circular plates is being charged such that the surface charge density on its plates is increasing at a constant rate with time. The magnetic field arising due to displacement current is:",
+        "selectedOption": 2,
+        "correctAnswer": "X",
+        "isCorrect": false,
+        "timeSpent": 10.0,
+        "isMarked": false,
+        "options": [
+          "(1) Non-zero everywhere with maximum at the imaginary cylindrical surface connecting peripheries of the plates",
+          "(2) Zero between the plates and non-zero outside",
+          "(3) Zero at all places",
+          "(4) Constant between the plates and zero outside the plates"
+        ]
+      }
+    ]
   }
 ]

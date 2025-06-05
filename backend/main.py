@@ -1,7 +1,8 @@
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Dict
 from pathlib import Path
@@ -32,15 +33,41 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files
+# Mount static files for React frontend
+static_build_dir = Path("/app/static")
+if static_build_dir.exists():
+    # Mount the entire static directory
+    app.mount("/static", StaticFiles(directory=str(static_build_dir / "static")), name="react_static")
+    print(f"✅ Serving React static files from: {static_build_dir}/static")
+    
+    # Also serve root level assets (favicon, manifest, etc.)
+    app.mount("/assets", StaticFiles(directory=str(static_build_dir)), name="assets")
+    print(f"✅ Serving React assets from: {static_build_dir}")
+else:
+    print(f"❌ React build directory not found: {static_build_dir}")
+
+# Mount quiz data files
+if QUIZ_DIR.exists():
+    app.mount("/quiz_data", StaticFiles(directory=str(QUIZ_DIR)), name="quiz_data")
+    print(f"✅ Serving quiz data from: {QUIZ_DIR}")
+else:
+    print(f"❌ Quiz data folder not found: {QUIZ_DIR}")
+    # Fallback to original path for development
+    quiz_fallback_path = Path(__file__).parent.parent / "quiz_data"
+    if quiz_fallback_path.exists():
+        app.mount("/quiz_data", StaticFiles(directory=str(quiz_fallback_path)), name="quiz_data")
+        print(f"✅ Using fallback quiz data path: {quiz_fallback_path}")
+
+# Mount images directory - serve all image subdirectories
 if IMAGES_DIR.exists():
-    app.mount("/NEET-2025-Code-48_extracted_images", StaticFiles(directory=str(IMAGES_DIR)), name="images")
+    app.mount("/images", StaticFiles(directory=str(IMAGES_DIR)), name="images")
+    print(f"✅ Serving images from: {IMAGES_DIR}")
 else:
     print(f"❌ Static image folder not found: {IMAGES_DIR}")
     # Fallback to original path for development
-    static_path = Path(__file__).parent.parent / "frontend" / "NEET-2025-Code-48_extracted_images"
+    static_path = Path(__file__).parent.parent / "images"
     if static_path.exists():
-        app.mount("/NEET-2025-Code-48_extracted_images", StaticFiles(directory=str(static_path)), name="images")
+        app.mount("/images", StaticFiles(directory=str(static_path)), name="images")
         print(f"✅ Using fallback image path: {static_path}")
     else:
         print(f"❌ Fallback image folder also not found: {static_path}")
@@ -182,3 +209,48 @@ def get_all_results():
             ) if student_results else 0
         }
     }
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "message": "Quiz Buzz API is running"}
+
+@app.get("/api")
+def api_root():
+    return {"message": "Quiz Buzz API", "status": "running", "health": "/health"}
+
+# Serve React app root
+@app.get("/")
+def serve_root():
+    static_build_dir = Path("/app/static")
+    index_file = static_build_dir / "index.html"
+    if index_file.exists():
+        return FileResponse(str(index_file))
+    else:
+        return {"message": "Quiz Buzz API", "status": "running", "frontend": "not found"}
+
+# Serve React app for all non-API routes
+@app.get("/{path:path}")
+def serve_react_app(request: Request, path: str):
+    static_build_dir = Path("/app/static")
+    index_file = static_build_dir / "index.html"
+    
+    # Skip API routes
+    if path.startswith(("quiz/", "teacher/", "images/", "quiz_data/", "docs", "openapi.json")):
+        raise HTTPException(status_code=404, detail="API endpoint not found")
+    
+    # If it's a static file request, try to serve it from root static directory
+    if path.endswith((".js", ".css", ".png", ".ico", ".json", ".svg", ".woff", ".woff2", ".ttf")) or path in ["favicon.ico", "manifest.json", "robots.txt"]:
+        file_path = static_build_dir / path
+        if file_path.exists():
+            return FileResponse(str(file_path))
+    
+    # For all other routes (including React routes), serve index.html
+    if index_file.exists():
+        return FileResponse(str(index_file))
+    else:
+        raise HTTPException(status_code=404, detail="React app not found")
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", 8080))
+    uvicorn.run(app, host="0.0.0.0", port=port)

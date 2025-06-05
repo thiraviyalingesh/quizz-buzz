@@ -27,7 +27,7 @@
     "questionNumber": 3,
     "questionText": "A ball of mass 0.5 kg is dropped from a height of 40 m. The ball hits the ground and rises to a height of 10 m. The impulse imparted to the ball during its collision with the ground is (Take g = 9.8 m/s2)",
     "question_images": [
-      "NEET-2025-Code-48_extracted_images/q3_diagram.png"
+      "q3_diagram.png"
     ],
     "option_with_images_": [
       "(1) 0",
@@ -41,7 +41,7 @@
     "questionNumber": 4,
     "questionText": "The intensity of transmitted light when a polaroid sheet, placed between two crossed polaroids at 22.5\u00b0 from the polarization axis of one of the polaroids, is (I0 is the intensity of polarised light after passing through the first polaroid):",
     "question_images": [
-      "NEET-2025-Code-48_extracted_images/q4_polaroid_diagram.png"
+      "q4_polaroid_diagram.png"
     ],
     "option_with_images_": [
       "(1) I0/8",
@@ -67,7 +67,7 @@
     "questionNumber": 6,
     "questionText": "The current passing through the battery in the given circuit, is:",
     "question_images": [
-      "NEET-2025-Code-48_extracted_images/q6_circuit.png"
+      "q6_circuit.png"
     ],
     "option_with_images_": [
       "(1) 2.5 A",
@@ -81,7 +81,7 @@
     "questionNumber": 7,
     "questionText": "Three identical heat conducting rods are connected in series as shown in the figure. The rods on the sides have thermal conductivity 2K while that in the middle has thermal conductivity K. The left end of the combination is maintained at temperature 3T and the right end at T. The rods are thermally insulated from outside. In steady state, temperature at the left junction is T1 and that at the right junction is T2. The ratio T1/T2 is",
     "question_images": [
-      "NEET-2025-Code-48_extracted_images/q7_thermal_rods.png"
+      "q7_thermal_rods.png"
     ],
     "option_with_images_": [
       "(1) 5/3",
@@ -96,10 +96,10 @@
     "questionText": "In an oscillating spring mass system, a spring is connected to a box filled with sand. As the box oscillates, sand leaks slowly out of the box vertically so that the average frequency \u03c9(t) and average amplitude A(t) of the system change with time t. Which one of the following options schematically depicts these changes correctly?",
     "question_images": [],
     "option_with_images_": [
-      "NEET-2025-Code-48_extracted_images/q8_option1.png",
-      "NEET-2025-Code-48_extracted_images/q8_option2.png",
-      "NEET-2025-Code-48_extracted_images/q8_option3.png",
-      "NEET-2025-Code-48_extracted_images/q8_option4.png"
+      "q8_option1.png",
+      "q8_option2.png",
+      "q8_option3.png",
+      "q8_option4.png"
     ],
     "correct_answer": "A"
   },
@@ -107,7 +107,7 @@
     "questionNumber": 9,
     "questionText": "AB is a part of an electrical circuit (see figure). The potential difference 'VA \u2013 VB', at the instant when current i = 2 A and is increasing at a rate of 1 amp/second is:",
     "question_images": [
-      "NEET-2025-Code-48_extracted_images/q9_circuit.png"
+      "q9_circuit.png"
     ],
     "option_with_images_": [
       "(1) 9 volt",
