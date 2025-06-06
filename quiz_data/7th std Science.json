@@ -1,0 +1,235 @@
+[
+  {
+    "questionNumber": 1,
+    "questionText": "Which of the following is a derived unit?",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) mass",
+      "(b) time",
+      "(c) area",
+      "(d) length"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 2,
+    "questionText": "Which of the following is correct?",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 1L = 1cc",
+      "(b) 1L = 10 cc",
+      "(c) 1L = 100 cc",
+      "(d) 1L = 1000 cc"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 3,
+    "questionText": "SI unit of density is",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) kg / m²",
+      "(b) kg / m³",
+      "(c) kg / m",
+      "(d) g / m³"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 4,
+    "questionText": "Two spheres have equal mass and volume in the ratio 2: 1. The ratio of their density is",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 1: 2",
+      "(b) 2: 1",
+      "(c) 4: 1",
+      "(d) 1: 4"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 5,
+    "questionText": "Light year is the unit of",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Distance",
+      "(b) time",
+      "(c) density",
+      "(d) both length and time"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 6,
+    "questionText": "Which of the following is a fundamental quantity?",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Speed",
+      "(b) Kilogram per cubic metre",
+      "(c) Luminous intensity"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 7,
+    "questionText": "Which of the following is the derived quantity?",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Ampere",
+      "(b) Luminous intensity",
+      "(c) Speed"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 8,
+    "questionText": "Iron has a higher density compared to the __________.",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Gold",
+      "(b) Water",
+      "(c) Silver"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 9,
+    "questionText": "Materials with a lower density are known as __________ material.",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Gaseous",
+      "(b) Rarer",
+      "(c) Solid"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 10,
+    "questionText": "Pick the odd one out:",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Gram",
+      "(b) Kilolitre",
+      "(c) Astronomical units",
+      "(d) Centimetre"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 11,
+    "questionText": "Which one is correct of the following options?",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) nanomètre > kilomètre",
+      "(b) gallon < centilitre < litre",
+      "(c) kilolitre > gallon > centilitre",
+      "(d) millilitre < centilitre < kilolitre"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 12,
+    "questionText": "The value of one light year is,",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 9.46 ×10^12 m",
+      "(b) 9.46 ×10^18 m",
+      "(c) 9.46 ×10^15 m",
+      "(d) 9.40 ×10^15 m"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 13,
+    "questionText": "The formula for density (D) is given as",
+    "question_images": [],
+    "option_with_images_": [
+      "Density =Mass / Area",
+      "(b) Density =Volume / Mass",
+      "(c) Density =Mass / Volume"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 14,
+    "questionText": "A circular disc has a radius of 10 cm . Find the area of the disc in m² ( Use π = 3.14).",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 0.0314 m²",
+      "(b) 0.314 m²",
+      "(c) 0.00314 m²",
+      "(d) 31.4 m²"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 15,
+    "questionText": "The mass of sphere is given as",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Mass = Volume x Density",
+      "(b) Mass = Density x Area",
+      "(c) Mass = Density x Volume"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 16,
+    "questionText": "The space occupied by a body is its",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Area",
+      "(b) Volume",
+      "(c) Perimeter",
+      "(d) Density"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 17,
+    "questionText": "The average distance between the earth and the sun.",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 150 million kilometers",
+      "(b) 15 million kilometers",
+      "(c) 1.5 billion kilometers",
+      "(d) 1500 million kilometers"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 18,
+    "questionText": "The water displacement method was found by",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Albert Einstein",
+      "(b) Isaac Newton",
+      "(c) Archimedes",
+      "(d) Galileo Galilei"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 19,
+    "questionText": "The nearest star to our solar system",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Rigel",
+      "(b) Alpha Centauri",
+      "(c) Sirius",
+      "(d) Proxima Centauri"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 20,
+    "questionText": "The value of one light-year can be calculated by multiplying",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Speed of light × Time",
+      "(b) Distance x Speed",
+      "(c) Time x Distance"
+    ],
+    "correct_answer": "A"
+  }
+]

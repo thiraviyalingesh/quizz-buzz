@@ -1,0 +1,242 @@
+[
+  {
+    "questionNumber": 1,
+    "questionText": "The temperature at 12 noon at a certain place was 18° above zero. If it decreases at the rate of 3° per hour at what time it would be 12° below zero?",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 10 am",
+      "(b) 12 mid night",
+      "(c) 10 pm",
+      "(d) 12 noon"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 2,
+    "questionText": "Identify the problem with negative numbers as its answer.",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 10+(−4)+8",
+      "(b) −4+2+10",
+      "(c) −9+(−5)+6",
+      "(d) 18+(−12)−6"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 3,
+    "questionText": "(-10) + (+7) = ____",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) +3",
+      "(b) -3",
+      "(c) -17",
+      "(d) +17"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 4,
+    "questionText": "(-8) + 10 + (-2) = ____",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 2",
+      "(b) 8",
+      "(c) 0",
+      "(d) 20"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 5,
+    "questionText": "20 + (-9) + 9 = ____",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 20",
+      "(b) 29",
+      "(c) 11",
+      "(d) 38"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 6,
+    "questionText": "(−5)−(−18)= __________",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 13",
+      "(b) −13",
+      "(c) 23",
+      "(d) −23"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 7,
+    "questionText": "(−100)−0+100= _________",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 0",
+      "(b) 200",
+      "(c) 100",
+      "(d) −200"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 8,
+    "questionText": "Which of the following expressions is equal to −30?",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) (−6)×(+5)",
+      "(b) −20−(−5×2)",
+      "(c) (6×10)−(6×5)",
+      "(d) (2×5)+(4×5)"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 9,
+    "questionText": "Which property is illustrated by the equation: (5×2)+(5×5)=5×(2+5)",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Associative",
+      "(b) Distributive",
+      "(c) Commutative",
+      "(d) Closure"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 10,
+    "questionText": "Which of the following does not represent an integer?",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 0÷(−7)",
+      "(b) 20÷(−4)",
+      "(c) (−9)÷3",
+      "(d) (-12)÷5"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 11,
+    "questionText": "The set of integers is not closed under",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Addition",
+      "(b) Multiplication",
+      "(c) Subtraction",
+      "(d) Division"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 12,
+    "questionText": "The place value of 3 in 85.073 is ________.",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) Thousandths",
+      "(b) Tenths",
+      "(c) Hundredths",
+      "(d) Thousands"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 13,
+    "questionText": "To convert grams into kilograms, we have to divide it by",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 100",
+      "(b) 1000",
+      "(c) 10",
+      "(d) 10000"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 14,
+    "questionText": "The decimal representation of 30 kg and 43 g is ______ kg.",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 30.43",
+      "(b) 30.043",
+      "(c) 30.0043",
+      "(d) 30.430"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 15,
+    "questionText": "3 / 5 =",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 0.06",
+      "(b) 0.006",
+      "(c) 0.6",
+      "(d) 6"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 16,
+    "questionText": "0.009 is equal to",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 0.90",
+      "(b) 0.900",
+      "(c) 0.090",
+      "(d) 0.00900"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 17,
+    "questionText": "78.56 _____ 78.57",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) >",
+      "(b) <",
+      "(c) =",
+      "(d) ≠"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 18,
+    "questionText": "Between which two whole numbers 1.7 lies?",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 1 and 2",
+      "(b) 1 and 7",
+      "(c) 2 and 3",
+      "(d) 3 and 4"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 19,
+    "questionText": "Subtract 1.35 from 3.51",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 8.64",
+      "(b) 2.16",
+      "(c) 6.21",
+      "(d) 4.86"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 20,
+    "questionText": "A frog jumps 5.3 cm in one jump. The distance travelled by the frog in 10 jumps is ____________.",
+    "question_images": [],
+    "option_with_images_": [
+      "(a) 53.5 cm",
+      "(b) 0.53 cm",
+      "(c) 53.0 cm",
+      "(d) 530 cm"
+    ],
+    "correct_answer": "C"
+  }
+]

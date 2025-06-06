@@ -38,22 +38,22 @@ const QuizPage: React.FC = () => {
   useEffect(() => {
     // Load selected quiz
     const selectedQuiz = localStorage.getItem('selectedQuiz');
-if (!selectedQuiz) {
-  navigate('/select-quiz');
-  return;
-}
+    const selectedQuizData = localStorage.getItem('selectedQuizData');
+    
+    if (!selectedQuiz || !selectedQuizData) {
+      navigate('/select-quiz');
+      return;
+    }
 
-fetch(`/quiz_data/${selectedQuiz}.json`)
-  .then(res => {
-    if (!res.ok) throw new Error("Quiz file not found");
-    return res.json();
-  })
-  .then(setQuestions)
-  .catch(err => {
-    alert("Failed to load quiz data.");
-    navigate('/select-quiz');
-  });
-}, [navigate]);
+    try {
+      const quizData = JSON.parse(selectedQuizData);
+      setQuestions(quizData);
+    } catch (error) {
+      console.error('Error parsing quiz data:', error);
+      alert("Failed to load quiz data.");
+      navigate('/select-quiz');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     // Timer countdown
