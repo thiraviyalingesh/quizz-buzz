@@ -9,7 +9,7 @@ const AdminLogin: React.FC = () => {
   const handleLogin = () => {
     // Empty username and password for admin access
     if (username === '' && password === '') {
-      navigate('/upload');
+      navigate('/select-quiz');
     } else {
       alert('Invalid credentials! Use empty username and password.');
     }
