@@ -17,6 +17,9 @@ const AdminLogin: React.FC = () => {
   const [adminData, setAdminData] = useState<AdminLoginResponse | null>(null);
   const navigate = useNavigate();
 
+  // Get API base URL from environment
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_LOCAL_API_URL || 'http://localhost:8080';
+
   const handleLogin = async () => {
     if (!email || !password) {
       alert('Please enter both email and password');
@@ -26,7 +29,7 @@ const AdminLogin: React.FC = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('/admin/login', {
+      const response = await fetch(`${API_BASE_URL}/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,6 +40,15 @@ const AdminLogin: React.FC = () => {
       if (response.ok) {
         const data: AdminLoginResponse = await response.json();
         setAdminData(data);
+        
+        // Store admin context in localStorage for use in other components
+        localStorage.setItem('adminContext', JSON.stringify({
+          email: data.email,
+          name: data.name,
+          plan_name: data.plan_name,
+          student_limit: data.student_limit
+        }));
+        
         setShowWelcome(true);
         
         // Auto-redirect after 4 seconds
