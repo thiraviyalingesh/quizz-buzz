@@ -33,6 +33,9 @@ COPY data/ /app/data/
 COPY quiz_data/ /app/quiz_data/
 COPY images/ /app/images/
 
+# Copy environment variables
+COPY .env /app/.env
+
 # Set environment variables
 ENV DATA_DIR=/app/data
 ENV QUIZ_DIR=/app/quiz_data

@@ -4,12 +4,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from typing import List, Dict
+from typing import List, Dict, Optional
 from pathlib import Path
 import json
 import os
 from datetime import datetime
+from pymongo import MongoClient
+from dotenv import load_dotenv
+import bcrypt
+from bson import ObjectId
 
+
+# Load environment variables
+load_dotenv()
 
 app = FastAPI()
 
@@ -17,6 +24,24 @@ app = FastAPI()
 DATA_DIR = Path(os.getenv("DATA_DIR", "/app/data"))
 QUIZ_DIR = Path(os.getenv("QUIZ_DIR", "/app/quiz_data"))
 IMAGES_DIR = Path(os.getenv("IMAGES_DIR", "/app/images"))
+
+# MongoDB Configuration
+MONGODB_URI = os.getenv("MONGODB_URI")
+MONGODB_DATABASE = os.getenv("MONGODB_DATABASE")
+
+# Initialize MongoDB client
+mongo_client = None
+db = None
+
+if MONGODB_URI and MONGODB_DATABASE:
+    try:
+        mongo_client = MongoClient(MONGODB_URI)
+        db = mongo_client[MONGODB_DATABASE]
+        print(f"✅ Connected to MongoDB: {MONGODB_DATABASE}")
+    except Exception as e:
+        print(f"❌ MongoDB connection failed: {e}")
+else:
+    print("⚠️ MongoDB credentials not found in environment variables")
 
 # Ensure directories exist
 DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -73,6 +98,17 @@ else:
         print(f"❌ Fallback image folder also not found: {static_path}")
 
 # Models
+class AdminLoginRequest(BaseModel):
+    email: str
+    password: str
+
+class AdminLoginResponse(BaseModel):
+    email: str
+    name: str
+    plan_name: str
+    student_limit: int
+    token: Optional[str] = None
+
 class StudentAnswer(BaseModel):
     questionNumber: int
     selectedOption: int
@@ -197,6 +233,52 @@ def submit_quiz(data: QuizSubmission):
     save_results()
 
     return {"message": "✅ Submission received", "score": result.score}
+
+@app.post("/admin/login")
+def admin_login(login_data: AdminLoginRequest):
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database connection not available")
+    
+    try:
+        # Find admin user by email
+        admin_user = db.admin_users.find_one({"email": login_data.email})
+        
+        if not admin_user:
+            raise HTTPException(status_code=401, detail="Invalid email or password")
+        
+        # Check if user is active
+        if not admin_user.get("is_active", False):
+            raise HTTPException(status_code=401, detail="Account is inactive")
+        
+        # Verify password
+        password_bytes = login_data.password.encode('utf-8')
+        stored_hash = admin_user["password_hash"]
+        
+        if isinstance(stored_hash, str):
+            stored_hash = stored_hash.encode('utf-8')
+        
+        if not bcrypt.checkpw(password_bytes, stored_hash):
+            raise HTTPException(status_code=401, detail="Invalid email or password")
+        
+        # Get plan information
+        plan = db.plans.find_one({"_id": admin_user["plan_id"]})
+        
+        if not plan:
+            raise HTTPException(status_code=500, detail="Plan not found")
+        
+        # Return admin data with plan info
+        return AdminLoginResponse(
+            email=admin_user["email"],
+            name=admin_user["name"],
+            plan_name=plan["name"].upper(),
+            student_limit=plan["student_limit"]
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Login error: {e}")
+        raise HTTPException(status_code=500, detail="Login failed")
 
 @app.get("/teacher/results")
 def get_all_results():
