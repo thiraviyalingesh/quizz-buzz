@@ -374,27 +374,59 @@ const AdminDashboard: React.FC = () => {
                           </span>
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          <span className="px-2 py-1 bg-green-100 text-green-800 rounded-md font-semibold">
+                          <span 
+                            className="px-2 py-1 rounded-md font-semibold"
+                            style={{ 
+                              backgroundColor: '#dcfce7', 
+                              color: '#166534',
+                              border: '1px solid #22c55e'
+                            }}
+                          >
                             ✅ {correctAnswers}/{totalQuestions}
                           </span>
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          <span className="px-2 py-1 bg-red-100 text-red-800 rounded-md font-semibold">
+                          <span 
+                            className="px-2 py-1 rounded-md font-semibold"
+                            style={{ 
+                              backgroundColor: '#fee2e2', 
+                              color: '#991b1b',
+                              border: '1px solid #ef4444'
+                            }}
+                          >
                             ❌ {wrongAnswers}/{totalQuestions}
                           </span>
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded-md font-semibold">
+                          <span 
+                            className="px-2 py-1 rounded-md font-semibold"
+                            style={{ 
+                              backgroundColor: '#f3f4f6', 
+                              color: '#374151',
+                              border: '1px solid #9ca3af'
+                            }}
+                          >
                             ⚪ {unanswered}/{totalQuestions}
                           </span>
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          <span className={`px-3 py-1 rounded-full text-sm font-bold ${
-                            percentage >= 80 ? 'bg-green-200 text-green-900' :
-                            percentage >= 60 ? 'bg-yellow-200 text-yellow-900' :
-                            percentage >= 40 ? 'bg-orange-200 text-orange-900' :
-                            'bg-red-200 text-red-900'
-                          }`}>
+                          <span 
+                            className="px-3 py-1 rounded-full text-sm font-bold"
+                            style={{ 
+                              backgroundColor: percentage >= 80 ? '#bbf7d0' : 
+                                             percentage >= 60 ? '#fef3c7' : 
+                                             percentage >= 40 ? '#fed7aa' : 
+                                             '#fecaca',
+                              color: percentage >= 80 ? '#14532d' : 
+                                     percentage >= 60 ? '#92400e' : 
+                                     percentage >= 40 ? '#c2410c' : 
+                                     '#991b1b',
+                              border: percentage >= 80 ? '2px solid #22c55e' : 
+                                      percentage >= 60 ? '2px solid #eab308' : 
+                                      percentage >= 40 ? '2px solid #f97316' : 
+                                      '2px solid #ef4444'
+                            }}
+                          >
                             📈 {percentage}%
                           </span>
                         </td>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Color Test for Quiz Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .color-demo { display: inline-block; margin: 10px; padding: 8px 12px; border-radius: 6px; font-weight: bold; }
+        .correct { background-color: #dcfce7; color: #166534; border: 1px solid #22c55e; }
+        .wrong { background-color: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+        .unanswered { background-color: #f3f4f6; color: #374151; border: 1px solid #9ca3af; }
+        .excellent { background-color: #bbf7d0; color: #14532d; border: 2px solid #22c55e; border-radius: 15px; }
+        .good { background-color: #fef3c7; color: #92400e; border: 2px solid #eab308; border-radius: 15px; }
+        .fair { background-color: #fed7aa; color: #c2410c; border: 2px solid #f97316; border-radius: 15px; }
+        .poor { background-color: #fecaca; color: #991b1b; border: 2px solid #ef4444; border-radius: 15px; }
+    </style>
+</head>
+<body>
+    <h2>🎯 Quiz Results Color Test</h2>
+    
+    <h3>Answer Categories:</h3>
+    <div class="color-demo correct">✅ 7/10 Correct</div>
+    <div class="color-demo wrong">❌ 2/10 Wrong</div>
+    <div class="color-demo unanswered">⚪ 1/10 Unanswered</div>
+    
+    <h3>Percentage Bands:</h3>
+    <div class="color-demo excellent">📈 85% Excellent</div>
+    <div class="color-demo good">📈 65% Good</div>
+    <div class="color-demo fair">📈 45% Fair</div>
+    <div class="color-demo poor">📈 25% Poor</div>
+    
+    <h3>Sample Result Row:</h3>
+    <table style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+        <thead style="background-color: #f9fafb;">
+            <tr>
+                <th style="padding: 12px; text-align: left; border: 1px solid #d1d5db;">Student</th>
+                <th style="padding: 12px; text-align: left; border: 1px solid #d1d5db;">Class</th>
+                <th style="padding: 12px; text-align: left; border: 1px solid #d1d5db;">✅ Correct</th>
+                <th style="padding: 12px; text-align: left; border: 1px solid #d1d5db;">❌ Wrong</th>
+                <th style="padding: 12px; text-align: left; border: 1px solid #d1d5db;">⚪ Unanswered</th>
+                <th style="padding: 12px; text-align: left; border: 1px solid #d1d5db;">📈 Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 12px; border: 1px solid #d1d5db;">Thiraviya Lingesh</td>
+                <td style="padding: 12px; border: 1px solid #d1d5db;">12-A</td>
+                <td style="padding: 12px; border: 1px solid #d1d5db;"><span class="correct">✅ 7/10</span></td>
+                <td style="padding: 12px; border: 1px solid #d1d5db;"><span class="wrong">❌ 2/10</span></td>
+                <td style="padding: 12px; border: 1px solid #d1d5db;"><span class="unanswered">⚪ 1/10</span></td>
+                <td style="padding: 12px; border: 1px solid #d1d5db;"><span class="good">📈 70%</span></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3>✅ Color Implementation Notes:</h3>
+    <ul>
+        <li><strong>Correct Answers:</strong> Green background (#dcfce7) with dark green text (#166534)</li>
+        <li><strong>Wrong Answers:</strong> Red background (#fee2e2) with dark red text (#991b1b)</li>
+        <li><strong>Unanswered:</strong> Gray background (#f3f4f6) with dark gray text (#374151)</li>
+        <li><strong>Percentage Colors:</strong> Green (80%+), Yellow (60%+), Orange (40%+), Red (<40%)</li>
+        <li><strong>Implementation:</strong> Using inline styles to guarantee color display</li>
+    </ul>
+</body>
+</html>
