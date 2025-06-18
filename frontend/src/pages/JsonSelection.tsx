@@ -114,9 +114,20 @@ const JsonSelection: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-bold text-gray-800 mb-2">{quizName}</h3>
                   <p className="text-gray-600 mb-4">{questionCount} Questions</p>
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
-                    Start Quiz
-                  </button>
+                  <div className="flex flex-col space-y-2">
+                    <button className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
+                      Start Quiz
+                    </button>
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate('/admin-dashboard');
+                      }}
+                      className="bg-yellow-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-yellow-700 transition duration-200"
+                    >
+                      Generate Link
+                    </button>
+                  </div>
                 </div>
               </div>
             );

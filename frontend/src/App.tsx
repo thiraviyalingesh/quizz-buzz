@@ -7,6 +7,7 @@ import StudentName from './pages/StudentName';
 import QuizPage from './pages/QuizPage';
 import ResultPage from './pages/ResultPage';
 import TeacherPanel from './pages/TeacherPanel';
+import AdminDashboard from './pages/AdminDashboard';
 import './styles/tailwind.css';
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/results" element={<ResultPage />} />
           <Route path="/teacher-panel" element={<TeacherPanel />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/quiz/:link_id" element={<QuizPage />} />
         </Routes>
       </div>
     </Router>

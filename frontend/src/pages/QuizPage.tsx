@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface QuizQuestion {
   questionNumber: number;
@@ -19,11 +19,16 @@ const QuizPage: React.FC = () => {
   const [points, setPoints] = useState(0);
   const [streak, setStreak] = useState(0);
   const [showPointsAnimation, setShowPointsAnimation] = useState(false);
+  const [isLinkQuiz, setIsLinkQuiz] = useState(false);
+  const [studentInfo, setStudentInfo] = useState<any>(null);
+  const [showStudentForm, setShowStudentForm] = useState(false);
+  const [linkData, setLinkData] = useState<any>(null);
   const navigate = useNavigate();
+  const { link_id } = useParams();
 
   const IMAGE_SERVER_BASE = window.location.origin;
   const selectedQuiz = localStorage.getItem('selectedQuiz') || 'Quiz';
-
+  
   // Function to convert image paths to use the correct quiz folder
   const getImagePath = (imagePath: string): string => {
     if (!imagePath) return '';
@@ -31,44 +36,82 @@ const QuizPage: React.FC = () => {
     // Extract filename from path (remove any existing folder prefix)
     const filename = imagePath.split('/').pop() || imagePath;
     
-    // Return path using current quiz folder
-    return `${IMAGE_SERVER_BASE}/images/${selectedQuiz}/${filename}`;
+    // For link-based quizzes, use the quiz_id from linkData
+    // For regular quizzes, use selectedQuiz from localStorage
+    const quizFolder = isLinkQuiz && linkData ? linkData.quiz_id : selectedQuiz;
+    
+    // Return path using correct quiz folder with cache busting
+    return `${IMAGE_SERVER_BASE}/images/${quizFolder}/${filename}?t=${Date.now()}`;
   };
 
   useEffect(() => {
-    // Load selected quiz
-    const selectedQuiz = localStorage.getItem('selectedQuiz');
-    const selectedQuizData = localStorage.getItem('selectedQuizData');
-    
-    if (!selectedQuiz || !selectedQuizData) {
-      navigate('/select-quiz');
-      return;
-    }
+    if (link_id) {
+      // This is a link-based quiz
+      setIsLinkQuiz(true);
+      setShowStudentForm(true);
+      loadQuizByLink();
+    } else {
+      // Regular quiz flow
+      const selectedQuiz = localStorage.getItem('selectedQuiz');
+      const selectedQuizData = localStorage.getItem('selectedQuizData');
+      
+      if (!selectedQuiz || !selectedQuizData) {
+        navigate('/select-quiz');
+        return;
+      }
 
-    try {
-      const quizData = JSON.parse(selectedQuizData);
-      setQuestions(quizData);
-    } catch (error) {
-      console.error('Error parsing quiz data:', error);
-      alert("Failed to load quiz data.");
-      navigate('/select-quiz');
+      try {
+        const quizData = JSON.parse(selectedQuizData);
+        setQuestions(quizData);
+      } catch (error) {
+        console.error('Error parsing quiz data:', error);
+        alert("Failed to load quiz data.");
+        navigate('/select-quiz');
+      }
     }
-  }, [navigate]);
+  }, [navigate, link_id]);
+
+  const loadQuizByLink = async () => {
+    try {
+      const response = await fetch(`/api/quiz/${link_id}`);
+      
+      if (!response.ok) {
+        if (response.status === 403) {
+          alert('Maximum student limit reached for this quiz');
+        } else if (response.status === 404) {
+          alert('Quiz link not found');
+        } else {
+          alert('Failed to load quiz');
+        }
+        navigate('/');
+        return;
+      }
+
+      const data = await response.json();
+      setLinkData(data);
+      setQuestions(data.questions || []);
+    } catch (err) {
+      alert('Failed to connect to server');
+      navigate('/');
+    }
+  };
 
   useEffect(() => {
-    // Timer countdown
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          handleSubmitQuiz();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+    // Only start timer when quiz actually begins (not during student form)
+    if (questions.length > 0 && (!isLinkQuiz || !showStudentForm)) {
+      const timer = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            handleSubmitQuiz();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
 
-    return () => clearInterval(timer);
-  }, []);
+      return () => clearInterval(timer);
+    }
+  }, [questions.length, isLinkQuiz, showStudentForm]);
 
   const formatTime = (seconds: number) => {
     const h = Math.floor(seconds / 3600);
@@ -118,41 +161,93 @@ const QuizPage: React.FC = () => {
     });
   };
 
-  const handleSubmitQuiz = () => {
-    const quizSubmissionData = {
-      studentName: localStorage.getItem('studentName') || 'Unknown',
-      studentEmail: localStorage.getItem('studentEmail') || 'info@buzztrackers.com',
-      quizName: localStorage.getItem('selectedQuiz') || 'Unknown Quiz',
-      answers: Object.entries(answers).map(([qNum, option]) => ({
-        questionNumber: parseInt(qNum),
-        selectedOption: option.charCodeAt(0) - 65,
-        timeSpent: 10, // Placeholder or add real tracking
-        isMarked: markedForReview.has(parseInt(qNum))
-      })),
-      totalTimeSpent: "00:10:00",  // You can replace with actual timer
-      submittedAt: new Date().toISOString()
-    };
+  const handleSubmitQuiz = async () => {
+    if (isLinkQuiz && link_id && studentInfo) {
+      // Link-based quiz submission
+      const submission = {
+        link_id,
+        name: studentInfo.name,
+        class_name: studentInfo.class_name,
+        section: studentInfo.section,
+        answers: Object.entries(answers).map(([qNum, option]) => ({
+          questionNumber: parseInt(qNum),
+          selectedOption: option.charCodeAt(0) - 65,
+          timeSpent: 10,
+          isMarked: markedForReview.has(parseInt(qNum))
+        })),
+        totalTimeSpent: formatTime(10 * 60 - timeLeft)
+      };
 
-    localStorage.setItem("quizSubmissionData", JSON.stringify(quizSubmissionData));
+      try {
+        const response = await fetch(`/api/quiz/${link_id}/submit`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(submission)
+        });
 
-    if (window.confirm('Are you sure you want to submit the quiz?')) {
-      // Gamification: Calculate bonus points
-      let bonusPoints = 0;
-      const completionRate = (answeredCount / questions.length) * 100;
-      
-      if (completionRate === 100) bonusPoints += 50; // Perfect completion
-      if (markedForReview.size === 0) bonusPoints += 25; // No reviews needed
-      if (timeLeft > (10 * 60 * 0.5)) bonusPoints += 30; // Speed bonus
-      
-      const totalPoints = points + bonusPoints;
-      setPoints(totalPoints);
-      
-      // Save quiz data with gamification stats
-      localStorage.setItem('quizAnswers', JSON.stringify(answers));
-      localStorage.setItem('quizPoints', totalPoints.toString());
-      localStorage.setItem('quizStreak', (streak + 1).toString());
-      
-      navigate('/results');
+        if (!response.ok) {
+          if (response.status === 409) {
+            alert('You have already submitted this quiz');
+          } else if (response.status === 403) {
+            alert('Maximum student limit reached');
+          } else {
+            alert('Failed to submit quiz');
+          }
+          return;
+        }
+
+        const result = await response.json();
+        
+        // Store results for display
+        localStorage.setItem('linkQuizResult', JSON.stringify({
+          score: result.score,
+          total: result.total,
+          percentage: result.percentage,
+          studentName: studentInfo.name
+        }));
+
+        navigate('/results');
+      } catch (err) {
+        alert('Failed to submit quiz. Please try again.');
+      }
+    } else {
+      // Regular quiz submission
+      const quizSubmissionData = {
+        studentName: localStorage.getItem('studentName') || 'Unknown',
+        studentEmail: localStorage.getItem('studentEmail') || 'info@buzztrackers.com',
+        quizName: localStorage.getItem('selectedQuiz') || 'Unknown Quiz',
+        answers: Object.entries(answers).map(([qNum, option]) => ({
+          questionNumber: parseInt(qNum),
+          selectedOption: option.charCodeAt(0) - 65,
+          timeSpent: 10,
+          isMarked: markedForReview.has(parseInt(qNum))
+        })),
+        totalTimeSpent: "00:10:00",
+        submittedAt: new Date().toISOString()
+      };
+
+      localStorage.setItem("quizSubmissionData", JSON.stringify(quizSubmissionData));
+
+      if (window.confirm('Are you sure you want to submit the quiz?')) {
+        // Gamification: Calculate bonus points
+        let bonusPoints = 0;
+        const completionRate = (answeredCount / questions.length) * 100;
+        
+        if (completionRate === 100) bonusPoints += 50;
+        if (markedForReview.size === 0) bonusPoints += 25;
+        if (timeLeft > (10 * 60 * 0.5)) bonusPoints += 30;
+        
+        const totalPoints = points + bonusPoints;
+        setPoints(totalPoints);
+        
+        localStorage.setItem('quizAnswers', JSON.stringify(answers));
+        localStorage.setItem('quizPoints', totalPoints.toString());
+        localStorage.setItem('quizStreak', (streak + 1).toString());
+        
+        navigate('/results');
+      }
     }
   };
 
@@ -170,6 +265,91 @@ const QuizPage: React.FC = () => {
 
   const currentQuestion = questions[currentQuestionIndex];
   const answeredCount = Object.keys(answers).length;
+
+  // Student form for link-based quizzes
+  if (isLinkQuiz && showStudentForm) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center p-4">
+        <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+          <div className="text-center mb-6">
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">Student Information</h1>
+            <p className="text-gray-600">Please enter your details to start the quiz</p>
+            {linkData && (
+              <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                <p className="text-sm text-blue-700">
+                  Quiz: {linkData.quiz_id} | Students: {linkData.current_count}/{linkData.max_allowed}
+                </p>
+              </div>
+            )}
+          </div>
+
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target as HTMLFormElement);
+            const studentData = {
+              name: formData.get('name') as string,
+              class_name: formData.get('class_name') as string,
+              section: formData.get('section') as string
+            };
+            
+            if (!studentData.name.trim() || !studentData.class_name.trim() || !studentData.section.trim()) {
+              alert('Please fill in all fields');
+              return;
+            }
+
+            setStudentInfo(studentData);
+            setShowStudentForm(false);
+          }} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Full Name *
+              </label>
+              <input
+                type="text"
+                name="name"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Class *
+              </label>
+              <input
+                type="text"
+                name="class_name"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="e.g., 10, 11, 12"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Section *
+              </label>
+              <input
+                type="text"
+                name="section"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="e.g., A, B, C"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
+            >
+              Start Quiz
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   if (questions.length === 0) {
     return (

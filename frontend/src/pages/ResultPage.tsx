@@ -12,6 +12,28 @@ const ResultPage: React.FC = () => {
   const studentName = localStorage.getItem('studentName') || 'Student';
 
   useEffect(() => {
+    // Check for link-based quiz results first
+    const linkResult = localStorage.getItem("linkQuizResult");
+    if (linkResult) {
+      const result = JSON.parse(linkResult);
+      setScore(result.percentage);
+      setTotalQuestions(result.total);
+      setSubmitted(true);
+      
+      const timer = setInterval(() => {
+        setCountdown(prev => {
+          if (prev === 1) {
+            localStorage.removeItem("linkQuizResult");
+            navigate("/");
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+
+    // Handle regular quiz submission
     const raw = localStorage.getItem("quizSubmissionData");
     if (raw && !submitted) {
       const payload = JSON.parse(raw);
