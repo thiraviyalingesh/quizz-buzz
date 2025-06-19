@@ -12,7 +12,7 @@ const JsonSelection: React.FC = () => {
       try {
         const predefinedQuizzes: {[key: string]: any} = {};
         
-        // List of known quiz files in quiz_data folder
+        // HARDCODED list of quiz files - DO NOT CHANGE
         const knownQuizFiles = [
           'JEE.json',
           'NEET-2025-Code-48.json',
@@ -20,14 +20,14 @@ const JsonSelection: React.FC = () => {
           '7th std Science.json'
         ];
         
-        // Load each quiz file
+        // Load each quiz file using API instead of direct fetch
         for (const filename of knownQuizFiles) {
           try {
-            const response = await fetch(`../quiz_data/${filename}`);
+            const quizName = filename.replace('.json', '');
+            const response = await fetch(`/api/quiz-data/${quizName}`);
             if (response.ok) {
               const quizData = await response.json();
-              const quizName = filename.replace('.json', '');
-              predefinedQuizzes[quizName] = quizData;
+              predefinedQuizzes[quizName] = quizData.questions;
             }
           } catch (error) {
             console.warn(`Could not load ${filename}:`, error);

@@ -102,6 +102,36 @@ class AdminLoginRequest(BaseModel):
     email: str
     password: str
 
+# New Exam Submission Models
+class ExamStudentSubmission(BaseModel):
+    name: str
+    class_name: str
+    section: str
+    submitted_at: str
+    score: int
+    total: int
+    percentage: float
+    answers: List[Dict]  # Detailed answer breakdown
+
+class ExamSession(BaseModel):
+    exam_id: str
+    quiz_id: str
+    quiz_name: str
+    created_at: str
+    admin_id: str
+    admin_email: str
+    link_id: str
+    correct_answers: Dict  # Original quiz JSON with correct answers
+    students: List[ExamStudentSubmission]
+    total_students: int
+    
+class ExamListResponse(BaseModel):
+    exam_id: str
+    quiz_name: str  
+    created_at: str
+    total_students: int
+    admin_name: str
+
 class AdminLoginResponse(BaseModel):
     email: str
     name: str
@@ -169,6 +199,112 @@ def load_results():
 def save_results():
     with open(results_file, "w", encoding="utf-8") as f:
         json.dump([r.dict() for r in student_results], f, indent=2)
+
+# New MongoDB Exam Session Functions
+def create_exam_session(quiz_id: str, admin_id: str, admin_email: str, link_id: str, questions: List[Dict]):
+    """Create a new exam session in MongoDB"""
+    if db is None:
+        print("⚠️ MongoDB not available, skipping exam session creation")
+        return None
+        
+    try:
+        # Generate unique exam_id with timestamp
+        now = datetime.utcnow()
+        exam_id = f"{quiz_id}_{now.strftime('%Y-%m-%d_%H-%M')}"
+        
+        # Get admin name from database
+        admin_user = db.admin_users.find_one({"_id": ObjectId(admin_id)})
+        admin_name = admin_user.get("name", "Unknown Admin") if admin_user else "Unknown Admin"
+        
+        exam_session = {
+            "exam_id": exam_id,
+            "quiz_id": quiz_id,
+            "quiz_name": quiz_id.replace("-", " ").title(),
+            "created_at": now.isoformat(),
+            "admin_id": admin_id,
+            "admin_email": admin_email,
+            "admin_name": admin_name,
+            "link_id": link_id,
+            "correct_answers": {
+                "questions": questions,
+                "total_questions": len(questions)
+            },
+            "students": [],
+            "total_students": 0
+        }
+        
+        result = db.exam_submissions.insert_one(exam_session)
+        print(f"✅ Created exam session: {exam_id}")
+        return exam_id
+        
+    except Exception as e:
+        print(f"❌ Error creating exam session: {e}")
+        return None
+
+def add_student_to_exam(exam_id: str, student_data: Dict):
+    """Add a student submission to an existing exam session"""
+    if db is None:
+        print("⚠️ MongoDB not available, skipping student addition")
+        return False
+        
+    try:
+        # Add student to the exam session
+        result = db.exam_submissions.update_one(
+            {"exam_id": exam_id},
+            {
+                "$push": {"students": student_data},
+                "$inc": {"total_students": 1}
+            }
+        )
+        
+        if result.modified_count > 0:
+            print(f"✅ Added student {student_data['name']} to exam {exam_id}")
+            return True
+        else:
+            print(f"❌ Failed to add student to exam {exam_id}")
+            return False
+            
+    except Exception as e:
+        print(f"❌ Error adding student to exam: {e}")
+        return False
+
+def get_exam_sessions(admin_email: str = None):
+    """Get all exam sessions, optionally filtered by admin"""
+    if db is None:
+        return []
+        
+    try:
+        query = {}
+        if admin_email:
+            query["admin_email"] = admin_email
+            
+        sessions = list(db.exam_submissions.find(query).sort("created_at", -1))
+        
+        # Convert ObjectId to string for JSON serialization
+        for session in sessions:
+            session["_id"] = str(session["_id"])
+            
+        return sessions
+        
+    except Exception as e:
+        print(f"❌ Error fetching exam sessions: {e}")
+        return []
+
+def get_exam_session_by_id(exam_id: str):
+    """Get a specific exam session with all student data"""
+    if db is None:
+        return None
+        
+    try:
+        session = db.exam_submissions.find_one({"exam_id": exam_id})
+        if session:
+            session["_id"] = str(session["_id"])
+            return session
+        return None
+        
+    except Exception as e:
+        print(f"❌ Error fetching exam session {exam_id}: {e}")
+        return None
 
 # Load questions - Dynamic quiz file loading
 def load_quiz_questions(quiz_name: str):
@@ -300,26 +436,58 @@ def calculate_score(answers: List[StudentAnswer], questions: List[Dict], quiz_na
 
 @app.post("/quiz/submit")
 def submit_quiz(data: QuizSubmission):
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database connection not available")
+    
     questions = load_quiz_questions(data.quizName)
     score_data = calculate_score(data.answers, questions, data.quizName)
 
-    result = StudentResult(
-        studentName=data.studentName,
-        studentEmail=data.studentEmail,
-        quizName=data.quizName,
-        totalQuestions=score_data["total"],
-        answeredQuestions=len(data.answers),
-        correctAnswers=score_data["correct"],
-        score=round((score_data["correct"] / score_data["total"]) * 100, 2),
-        timeSpent=data.totalTimeSpent,
-        submittedAt=data.submittedAt,
-        detailedResults=score_data["details"]
-    )
+    # Create individual submission document
+    submission_doc = {
+        "quiz_json_name": data.quizName,
+        "admin_email": "system@admin.com",  # Regular quizzes go to system admin
+        "student_name": data.studentName,
+        "student_email": data.studentEmail,
+        "total_questions": score_data["total"],
+        "answered_questions": len(data.answers),
+        "correct_answers": score_data["correct"],
+        "wrong_answers": score_data["wrong"],
+        "unanswered": score_data["unanswered"],
+        "score": round((score_data["correct"] / score_data["total"]) * 100, 2),
+        "percentage": score_data["percentage"],
+        "time_spent": data.totalTimeSpent,
+        "submitted_at": data.submittedAt,
+        "timestamp": datetime.utcnow(),
+        "detailed_results": score_data["details"],
+        "answers": [answer.dict() for answer in data.answers]
+    }
 
-    student_results.append(result)
-    save_results()
+    try:
+        # Save individual submission to MongoDB
+        db.exam_submissions.insert_one(submission_doc)
+        print(f"✅ Saved submission for {data.studentName} - Quiz: {data.quizName}")
+        
+        # Also save to JSON for backward compatibility
+        result = StudentResult(
+            studentName=data.studentName,
+            studentEmail=data.studentEmail,
+            quizName=data.quizName,
+            totalQuestions=score_data["total"],
+            answeredQuestions=len(data.answers),
+            correctAnswers=score_data["correct"],
+            score=round((score_data["correct"] / score_data["total"]) * 100, 2),
+            timeSpent=data.totalTimeSpent,
+            submittedAt=data.submittedAt,
+            detailedResults=score_data["details"]
+        )
+        student_results.append(result)
+        save_results()
+        
+    except Exception as e:
+        print(f"❌ Error saving submission: {e}")
+        raise HTTPException(status_code=500, detail="Failed to save submission")
 
-    return {"message": "✅ Submission received", "score": result.score}
+    return {"message": "✅ Submission received", "score": submission_doc["score"]}
 
 @app.post("/admin/login")
 def admin_login(login_data: AdminLoginRequest):
@@ -378,7 +546,7 @@ class GenerateLinkResponse(BaseModel):
     max_allowed: int
 
 @app.post("/admin/generate-link")
-def generate_quiz_link(request: GenerateLinkRequest, admin_email: str = Header(..., alias="X-Admin-Email")):
+def generate_quiz_link(request: GenerateLinkRequest, admin_email: str = Header(..., alias="X-Admin-Email"), http_request: Request = None):
     if db is None:
         raise HTTPException(status_code=500, detail="Database connection not available")
     
@@ -396,11 +564,23 @@ def generate_quiz_link(request: GenerateLinkRequest, admin_email: str = Header(.
         # Use dynamic student limit from database
         max_students = plan.get("max_students", plan.get("student_limit", 1))
         
+        # Load quiz questions to store in exam session
+        questions = load_quiz_questions(request.quiz_id)
+        
         # Generate unique link with dynamic limit
         import secrets
         link_id = secrets.token_urlsafe(8)
         
-        # Store link with dynamic tracking
+        # Create exam session in MongoDB
+        exam_id = create_exam_session(
+            quiz_id=request.quiz_id,
+            admin_id=str(admin_user["_id"]),
+            admin_email=admin_email,
+            link_id=link_id,
+            questions=questions
+        )
+        
+        # Store link with dynamic tracking (keep in-memory for quick access)
         quiz_links_storage[link_id] = {
             "max_allowed": max_students,
             "current_count": 0,
@@ -408,14 +588,19 @@ def generate_quiz_link(request: GenerateLinkRequest, admin_email: str = Header(.
             "quiz_id": request.quiz_id,
             "admin_id": str(admin_user["_id"]),
             "admin_email": admin_email,
-            "plan_name": plan["name"]
+            "plan_name": plan["name"],
+            "exam_id": exam_id  # Link to MongoDB exam session
         }
         
         print(f"✅ Generated quiz link {link_id} for admin {admin_user['name']} with {max_students} student limit ({plan['name']} plan)")
+        print(f"✅ Created exam session: {exam_id}")
+        
+        # Generate URL based on the request's host (works with tunnels)
+        base_url = f"{http_request.url.scheme}://{http_request.url.netloc}" if http_request else "http://localhost:8080"
         
         return GenerateLinkResponse(
             link_id=link_id,
-            link_url=f"http://localhost:8080/quiz/{link_id}",
+            link_url=f"{base_url}/quiz/{link_id}",
             quiz_json_file=f"{request.quiz_id}.json",
             max_allowed=max_students
         )
@@ -506,30 +691,58 @@ def submit_quiz_by_link(link_id: str, submission: LinkQuizSubmission):
             detail=f"Maximum student limit reached ({link_data['current_count']}/{link_data['max_allowed']})"
         )
     
-    # Load quiz questions for scoring - use the specific quiz from the link
-    try:
-        questions = load_quiz_questions(link_data["quiz_id"])
-        print(f"✅ Loaded quiz questions from {link_data['quiz_id']}.json for scoring")
-    except:
-        # Fallback to default quiz files if specific quiz not found
-        quiz_files = ["NEET-2025-Code-48", "JEE", "7th std Maths", "7th std Science"]
-        questions = None
-        
-        for quiz_file in quiz_files:
-            try:
-                questions = load_quiz_questions(quiz_file)
-                print(f"⚠️ Using fallback quiz file: {quiz_file}.json")
-                break
-            except:
-                continue
-        
-        if not questions:
-            raise HTTPException(status_code=404, detail="Quiz questions not found")
+    # Load quiz questions for scoring
+    questions = load_quiz_questions(link_data["quiz_id"])
     
     # Calculate score with proper validation
     score_data = calculate_score(submission.answers, questions, link_data["quiz_id"])
     
-    # Create student result with enhanced data
+    # Create individual submission document for new MongoDB structure
+    submission_doc = {
+        "quiz_json_name": link_data["quiz_id"],  # Use the quiz_id from link
+        "admin_email": link_data["admin_email"],  # Track which admin generated this link
+        "student_name": submission.name,
+        "student_email": f"{submission.name}@{submission.class_name}.school",  # Generate email if not provided
+        "class_name": submission.class_name,
+        "section": submission.section,
+        "total_questions": score_data["total"],
+        "answered_questions": len(submission.answers),
+        "correct_answers": score_data["correct"],
+        "wrong_answers": score_data["wrong"],
+        "unanswered": score_data["unanswered"],
+        "score": round((score_data["correct"] / score_data["total"]) * 100, 2),
+        "percentage": score_data["percentage"],
+        "time_spent": submission.totalTimeSpent,
+        "submitted_at": datetime.utcnow().isoformat(),
+        "timestamp": datetime.utcnow(),
+        "detailed_results": score_data["details"],
+        "answers": [answer.dict() for answer in submission.answers],
+        "link_id": link_id  # Track which link was used
+    }
+
+    # Save individual submission to MongoDB
+    if db is not None:
+        try:
+            result = db.exam_submissions.insert_one(submission_doc)
+            print(f"✅ Saved individual submission to MongoDB:")
+            print(f"   📝 Submission ID: {result.inserted_id}")
+            print(f"   👤 Student: {submission.name}")
+            print(f"   📚 Quiz: '{link_data['quiz_id']}'")
+            print(f"   📊 Score: {submission_doc['score']}%")
+        except Exception as e:
+            print(f"❌ Error saving submission to MongoDB: {e}")
+    
+    # Update link tracking (in-memory)
+    quiz_links_storage[link_id]["current_count"] += 1
+    quiz_links_storage[link_id]["students"].append({
+        "id": student_id,
+        "name": submission.name,
+        "class": submission.class_name,
+        "section": submission.section,
+        "submitted_at": datetime.utcnow().isoformat()
+    })
+    
+    # Also save to DATA folder for backward compatibility
     student_result = {
         "link_id": link_id,
         "quiz_id": link_data["quiz_id"],
@@ -547,17 +760,6 @@ def submit_quiz_by_link(link_id: str, submission: LinkQuizSubmission):
         "submitted_at": datetime.utcnow().isoformat()
     }
     
-    # Update link tracking
-    quiz_links_storage[link_id]["current_count"] += 1
-    quiz_links_storage[link_id]["students"].append({
-        "id": student_id,
-        "name": submission.name,
-        "class": submission.class_name,
-        "section": submission.section,
-        "submitted_at": datetime.utcnow().isoformat()
-    })
-    
-    # Save to DATA folder
     results_file = DATA_DIR / "student_results.json"
     existing_results = []
     
@@ -620,6 +822,282 @@ def get_all_results():
             ) if all_results else 0
         }
     }
+
+# New Exam Management API Endpoints
+
+@app.get("/admin/exams")
+def get_admin_exams(admin_email: str = Header(..., alias="X-Admin-Email"), page: int = 1, limit: int = 20):
+    """Get all quiz submissions grouped by quiz name for fast loading"""
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database connection not available")
+    
+    try:
+        # Aggregate submissions by quiz_json_name for fast overview - filter by admin
+        pipeline = [
+            {
+                "$match": {"admin_email": admin_email}  # Only show this admin's submissions
+            },
+            {
+                "$group": {
+                    "_id": "$quiz_json_name",
+                    "total_submissions": {"$sum": 1},
+                    "latest_submission": {"$max": "$timestamp"},
+                    "average_score": {"$avg": "$score"},
+                    "first_submission": {"$min": "$timestamp"}
+                }
+            },
+            {
+                "$sort": {"latest_submission": -1}
+            },
+            {
+                "$skip": (page - 1) * limit
+            },
+            {
+                "$limit": limit
+            }
+        ]
+        
+        quiz_groups = list(db.exam_submissions.aggregate(pipeline))
+        
+        # Import timezone for IST conversion
+        from datetime import timezone, timedelta
+        ist = timezone(timedelta(hours=5, minutes=30))
+        
+        exam_list = []
+        for group in quiz_groups:
+            # Convert timestamps to IST
+            latest_ist = None
+            first_ist = None
+            
+            if group["latest_submission"]:
+                latest_utc = group["latest_submission"]
+                latest_ist = latest_utc.replace(tzinfo=timezone.utc).astimezone(ist).strftime("%d/%m/%Y, %I:%M:%S %p")
+            
+            if group["first_submission"]:
+                first_utc = group["first_submission"]
+                first_ist = first_utc.replace(tzinfo=timezone.utc).astimezone(ist).strftime("%d/%m/%Y, %I:%M:%S %p")
+            
+            exam_list.append({
+                "quiz_name": group["_id"],
+                "total_submissions": group["total_submissions"],
+                "latest_submission": latest_ist,
+                "first_submission": first_ist,
+                "average_score": round(group["average_score"], 2) if group["average_score"] else 0
+            })
+        
+        # Get total count for pagination
+        total_count = len(quiz_groups)
+        
+        print(f"📊 Found {total_count} quiz groups with submissions")
+        
+        return {
+            "exams": exam_list,
+            "total_exams": total_count,
+            "page": page,
+            "limit": limit,
+            "total_pages": (total_count + limit - 1) // limit
+        }
+        
+    except Exception as e:
+        print(f"❌ Error fetching admin exams: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch exams")
+
+@app.get("/admin/exam/{quiz_name}")
+def get_exam_details(quiz_name: str, admin_email: str = Header(..., alias="X-Admin-Email"), page: int = 1, limit: int = 50):
+    """Get all student submissions for a specific quiz with pagination"""
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database connection not available")
+    
+    try:
+        # URL decode the quiz name to handle special characters
+        import urllib.parse
+        decoded_quiz_name = urllib.parse.unquote(quiz_name)
+        
+        print(f"🔍 Looking for quiz: '{decoded_quiz_name}' (original: '{quiz_name}')")
+        
+        # Get submissions for this quiz with pagination - filter by admin
+        query = {
+            "quiz_json_name": decoded_quiz_name,
+            "admin_email": admin_email  # Only show this admin's submissions
+        }
+        
+        submissions = list(db.exam_submissions.find(query).sort("timestamp", -1).skip((page - 1) * limit).limit(limit))
+        
+        print(f"📊 Found {len(submissions)} submissions for quiz: {decoded_quiz_name} (admin: {admin_email})")
+        
+        if not submissions:
+            # Also check what quiz names exist for this admin
+            existing_quizzes = list(db.exam_submissions.distinct("quiz_json_name", {"admin_email": admin_email}))
+            print(f"🗂️ Available quizzes for admin {admin_email}: {existing_quizzes}")
+            raise HTTPException(status_code=404, detail=f"No submissions found for quiz: {decoded_quiz_name}")
+        
+        # Get total count for pagination - filter by admin
+        total_count = db.exam_submissions.count_documents(query)
+        
+        # Import timezone for IST conversion
+        from datetime import timezone, timedelta
+        ist = timezone(timedelta(hours=5, minutes=30))
+        
+        # Format student data for frontend
+        students = []
+        for i, submission in enumerate(submissions):
+            # Convert timestamp to IST
+            timestamp_ist = None
+            if submission.get("timestamp"):
+                timestamp_utc = submission["timestamp"]
+                timestamp_ist = timestamp_utc.replace(tzinfo=timezone.utc).astimezone(ist).strftime("%d/%m/%Y, %I:%M:%S %p")
+            
+            students.append({
+                "index": (page - 1) * limit + i,
+                "submission_id": str(submission["_id"]),
+                "student_name": submission.get("student_name", "Unknown"),
+                "student_email": submission.get("student_email", ""),
+                "score": submission.get("score", 0),
+                "percentage": submission.get("percentage", 0),
+                "time_spent": submission.get("time_spent", ""),
+                "submitted_at": submission.get("submitted_at", ""),
+                "timestamp": timestamp_ist,
+                "total_questions": submission.get("total_questions", 0),
+                "correct_answers": submission.get("correct_answers", 0),
+                "wrong_answers": submission.get("wrong_answers", 0),
+                "unanswered": submission.get("unanswered", 0)
+            })
+        
+        # Calculate quiz statistics
+        avg_score = round(sum(s.get("score", 0) for s in submissions) / len(submissions), 2) if submissions else 0
+        
+        return {
+            "quiz_info": {
+                "quiz_name": quiz_name,
+                "total_submissions": total_count,
+                "average_score": avg_score,
+                "page": page,
+                "limit": limit,
+                "total_pages": (total_count + limit - 1) // limit
+            },
+            "students": students
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"❌ Error fetching quiz details: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch quiz details")
+
+@app.get("/admin/submission/{submission_id}")
+def get_student_detailed_answers(submission_id: str, admin_email: str = Header(..., alias="X-Admin-Email")):
+    """Get detailed question-by-question answers for a specific student submission"""
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database connection not available")
+    
+    try:
+        from bson import ObjectId
+        from datetime import timezone, timedelta
+        ist = timezone(timedelta(hours=5, minutes=30))
+        
+        # Get individual submission by ID
+        submission = db.exam_submissions.find_one({"_id": ObjectId(submission_id)})
+        
+        if not submission:
+            raise HTTPException(status_code=404, detail="Submission not found")
+        
+        # Convert timestamp to IST for submission details
+        timestamp_ist = None
+        if submission.get("timestamp"):
+            timestamp_utc = submission["timestamp"]
+            timestamp_ist = timestamp_utc.replace(tzinfo=timezone.utc).astimezone(ist).strftime("%d/%m/%Y, %I:%M:%S %p")
+        
+        # Return detailed submission data
+        return {
+            "student_info": {
+                "submission_id": str(submission["_id"]),
+                "student_name": submission.get("student_name", "Unknown"),
+                "student_email": submission.get("student_email", ""),
+                "quiz_name": submission.get("quiz_json_name", ""),
+                "submitted_at": submission.get("submitted_at", ""),
+                "timestamp": timestamp_ist,
+                "time_spent": submission.get("time_spent", "")
+            },
+            "score_summary": {
+                "score": submission.get("score", 0),
+                "percentage": submission.get("percentage", 0),
+                "total_questions": submission.get("total_questions", 0),
+                "correct_answers": submission.get("correct_answers", 0),
+                "wrong_answers": submission.get("wrong_answers", 0),
+                "unanswered": submission.get("unanswered", 0)
+            },
+            "detailed_results": submission.get("detailed_results", []),
+            "student_answers": submission.get("answers", [])
+        }
+        
+    except Exception as e:
+        print(f"❌ Error fetching student details: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch student details")
+
+@app.get("/api/quiz-files")
+def get_quiz_files():
+    """Get available quiz files from the quiz_data directory"""
+    try:
+        quiz_files = []
+        for file_path in QUIZ_DATA_DIR.glob("*.json"):
+            quiz_files.append(file_path.stem)  # Get filename without .json extension
+        
+        quiz_files.sort()
+        return {
+            "quiz_files": quiz_files,
+            "count": len(quiz_files)
+        }
+        
+    except Exception as e:
+        print(f"❌ Error fetching quiz files: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch quiz files")
+
+@app.get("/api/quiz-data/{quiz_name}")
+def get_quiz_data(quiz_name: str):
+    """Get quiz data for frontend quiz selection"""
+    try:
+        questions = load_quiz_questions(quiz_name)
+        return {
+            "quiz_name": quiz_name,
+            "questions": questions,
+            "total_questions": len(questions)
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"❌ Error loading quiz data for {quiz_name}: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to load quiz data for {quiz_name}")
+
+@app.get("/admin/debug/submissions")
+def debug_submissions(admin_email: str = Header(..., alias="X-Admin-Email")):
+    """Debug endpoint to see what's in the exam_submissions collection"""
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database connection not available")
+    
+    try:
+        # Get all quiz names and submission counts
+        pipeline = [
+            {
+                "$group": {
+                    "_id": "$quiz_json_name",
+                    "count": {"$sum": 1},
+                    "latest": {"$max": "$timestamp"}
+                }
+            },
+            {"$sort": {"latest": -1}}
+        ]
+        
+        quiz_groups = list(db.exam_submissions.aggregate(pipeline))
+        total_submissions = db.exam_submissions.count_documents({})
+        
+        return {
+            "total_submissions": total_submissions,
+            "quiz_groups": quiz_groups,
+            "message": "Debug info for exam_submissions collection"
+        }
+        
+    except Exception as e:
+        return {"error": str(e), "message": "Failed to fetch debug info"}
 
 @app.get("/health")
 def health_check():
