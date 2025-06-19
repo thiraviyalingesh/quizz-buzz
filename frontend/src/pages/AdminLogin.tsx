@@ -17,8 +17,9 @@ const AdminLogin: React.FC = () => {
   const [adminData, setAdminData] = useState<AdminLoginResponse | null>(null);
   const navigate = useNavigate();
 
-  // Get API base URL from environment
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_LOCAL_API_URL || 'http://localhost:8080';
+  // Get API base URL from environment - use current domain for tunnels
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 
+    (process.env.NODE_ENV === 'production' ? window.location.origin : 'http://localhost:8080');
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -130,55 +131,114 @@ const AdminLogin: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800 animate-fadeIn">
-      <div className="bg-white p-8 rounded-xl shadow-2xl w-96 transform animate-bounceIn">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2 animate-slideInUp">Quiz Admin</h1>
-          <p className="text-gray-600 animate-fadeIn" style={{ animationDelay: '0.2s' }}>Login to manage quizzes</p>
-        </div>
-        
-        <div className="space-y-6">
-          <div className="animate-slideInLeft" style={{ animationDelay: '0.3s' }}>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
-              placeholder="Enter your email"
-              disabled={loading}
-            />
-          </div>          
-          <div className="animate-slideInLeft" style={{ animationDelay: '0.4s' }}>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-md"
-              placeholder="Enter your password"
-              disabled={loading}
-            />
+    <div className="h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 animate-fadeIn overflow-hidden">
+      <div className="container mx-auto px-4 h-full">
+        <div className="flex items-center justify-center h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl w-full h-full max-h-screen">
+            
+            {/* Left Side - Illustration */}
+            <div className="flex flex-col items-center justify-center text-center animate-slideInLeft">
+              <div className="mb-4">
+                <img 
+                  src="/login-illustration.png" 
+                  alt="UI/UX Designers Working" 
+                  className="w-full max-w-md h-auto animate-float"
+                />
+              </div>
+              <div className="space-y-2">
+                <h1 className="text-2xl lg:text-3xl font-bold text-gray-800 animate-slideInUp">
+                  Welcome to
+                </h1>
+                <h2 className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent animate-slideInUp" style={{ animationDelay: '0.2s' }}>
+                  Buzztrackers
+                </h2>
+                <p className="text-sm text-gray-600 animate-slideInUp" style={{ animationDelay: '0.4s' }}>
+                  Create, manage and analyze quizzes with powerful insights
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 text-xs text-gray-500 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
+                  <div className="flex items-center space-x-1">
+                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                    <span>Easy Quiz Creation</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                    <span>Real-time Analytics</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <span className="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+                    <span>Student Management</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Login Form */}
+            <div className="flex items-center justify-center animate-slideInRight">
+              <div className="bg-white p-6 lg:p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-100">
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-3">
+                    <span className="text-lg text-white">🔐</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-1">Admin Login</h3>
+                  <p className="text-sm text-gray-600">Access your quiz management dashboard</p>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="animate-slideInLeft" style={{ animationDelay: '0.3s' }}>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      📧 Email Address
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-gray-300"
+                      placeholder="Enter your email"
+                      disabled={loading}
+                    />
+                  </div>
+                  
+                  <div className="animate-slideInLeft" style={{ animationDelay: '0.4s' }}>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      🔒 Password
+                    </label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 hover:border-gray-300"
+                      placeholder="Enter your password"
+                      disabled={loading}
+                    />
+                  </div>
+                  
+                  <button
+                    onClick={handleLogin}
+                    disabled={loading}
+                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 active:scale-95 animate-slideInUp disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                    style={{ animationDelay: '0.5s' }}
+                  >
+                    {loading ? (
+                      <div className="flex items-center justify-center space-x-2">
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Logging in...</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center space-x-2">
+                        <span>🚀 Login to Dashboard</span>
+                      </div>
+                    )}
+                  </button>
+                </div>
+                
+                <div className="mt-4 text-center animate-fadeIn" style={{ animationDelay: '0.6s' }}>
+                  <p className="text-xs text-gray-500">
+                    🛡️ Secure admin access to quiz management platform
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          <button
-            onClick={handleLogin}
-            disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 active:scale-95 animate-slideInUp disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ animationDelay: '0.5s' }}
-          >
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-        </div>
-        
-        <div className="mt-6 text-center animate-fadeIn" style={{ animationDelay: '0.6s' }}>
-          <p className="text-sm text-gray-500">
-            🔐 Enter your admin credentials to access the quiz platform
-          </p>
         </div>
       </div>
     </div>

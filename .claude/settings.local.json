@@ -3,7 +3,10 @@
     "allow": [
       "Bash(docker build:*)",
       "Bash(git restore:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }
