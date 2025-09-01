@@ -377,7 +377,9 @@ const QuizPage: React.FC = () => {
           </button>
           
           <div>
-            <h1 className="text-lg md:text-xl font-bold animate-pulse">{selectedQuiz.replace(/-/g, ' ')} | Physics</h1>
+            <h1 className="text-lg md:text-xl font-bold animate-pulse">
+              {selectedQuiz === 'NEET-2025-Code-48' ? 'NEET EXAM' : selectedQuiz.replace(/-/g, ' ')}
+            </h1>
             <div className="text-xs md:text-sm">
               Question {currentQuestion.questionNumber} of {questions.length}
             </div>
@@ -630,8 +632,9 @@ const QuizPage: React.FC = () => {
               <h3 className="text-base font-bold text-gray-800 mb-3">Question Palette</h3>
               
               {/* Question Numbers Grid */}
-              <div className="grid grid-cols-5 gap-1.5 mb-3">
-                {questions.map((question, index) => {
+              <div className="max-h-64 overflow-y-auto">
+                <div className="grid grid-cols-5 gap-1.5 mb-3">
+                  {questions.map((question, index) => {
                   const status = getQuestionStatus(question.questionNumber);
                   
                   let bgColor = 'bg-gray-300 text-gray-700';
@@ -653,6 +656,7 @@ const QuizPage: React.FC = () => {
                     </button>
                   );
                 })}
+                </div>
               </div>
 
               {/* Legend - Compact */}

@@ -17,7 +17,8 @@ const JsonSelection: React.FC = () => {
           'JEE.json',
           'NEET-2025-Code-48.json',
           '7th std Maths.json',
-          '7th std Science.json'
+          '7th std Science.json',
+          'Number_System_7th_std.json'
         ];
         
         // Load each quiz file using API instead of direct fetch
@@ -121,6 +122,9 @@ const JsonSelection: React.FC = () => {
                     <button 
                       onClick={(e) => {
                         e.stopPropagation();
+                        // Save the selected quiz before navigating to admin panel
+                        localStorage.setItem('selectedQuiz', quizName);
+                        localStorage.setItem('selectedQuizData', JSON.stringify(quizzes[quizName]));
                         navigate('/admin-dashboard');
                       }}
                       className="bg-yellow-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-yellow-700 transition duration-200"

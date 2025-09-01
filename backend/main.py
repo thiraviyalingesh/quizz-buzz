@@ -1039,7 +1039,7 @@ def get_quiz_files():
     """Get available quiz files from the quiz_data directory"""
     try:
         quiz_files = []
-        for file_path in QUIZ_DATA_DIR.glob("*.json"):
+        for file_path in QUIZ_DIR.glob("*.json"):
             quiz_files.append(file_path.stem)  # Get filename without .json extension
         
         quiz_files.sort()
