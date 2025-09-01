@@ -65,7 +65,9 @@ const AdminDashboard: React.FC = () => {
   const [loadingStats, setLoadingStats] = useState(false);
   const [adminStats, setAdminStats] = useState<AdminStats | null>(null);
   const [adminContext, setAdminContext] = useState<AdminContextType | null>(null);
-  const [selectedQuiz, setSelectedQuiz] = useState<string>('NEET-2025-Code-48');
+  const [selectedQuiz, setSelectedQuiz] = useState<string>('');
+  const [availableQuizzes, setAvailableQuizzes] = useState<string[]>([]);
+  const [loadingQuizzes, setLoadingQuizzes] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -82,6 +84,47 @@ const AdminDashboard: React.FC = () => {
       navigate('/admin-login');
     }
   }, [navigate]);
+
+  // Load available quizzes dynamically
+  useEffect(() => {
+    const loadAvailableQuizzes = async () => {
+      setLoadingQuizzes(true);
+      try {
+        const response = await fetch('/api/quiz-files');
+        if (response.ok) {
+          const data = await response.json();
+          setAvailableQuizzes(data.quiz_files);
+          // Use the quiz selected by user on quiz selection page
+          const userSelectedQuiz = localStorage.getItem('selectedQuiz');
+          if (userSelectedQuiz && data.quiz_files.includes(userSelectedQuiz)) {
+            setSelectedQuiz(userSelectedQuiz);
+          } else if (data.quiz_files.length > 0 && !selectedQuiz) {
+            // Only fallback to first quiz if user hasn't selected anything
+            setSelectedQuiz(data.quiz_files[0]);
+          }
+          console.log('📚 Loaded available quizzes:', data.quiz_files);
+        } else {
+          throw new Error('Failed to load quizzes from API');
+        }
+      } catch (error) {
+        console.error('❌ Error loading quizzes:', error);
+        // Fallback to hardcoded list if API fails
+        const fallbackQuizzes = ['NEET-2025-Code-48', 'JEE', '7th std Maths', '7th std Science'];
+        setAvailableQuizzes(fallbackQuizzes);
+        // Use the quiz selected by user on quiz selection page
+        const userSelectedQuiz = localStorage.getItem('selectedQuiz');
+        if (userSelectedQuiz && fallbackQuizzes.includes(userSelectedQuiz)) {
+          setSelectedQuiz(userSelectedQuiz);
+        } else if (!selectedQuiz) {
+          setSelectedQuiz(fallbackQuizzes[0]);
+        }
+      } finally {
+        setLoadingQuizzes(false);
+      }
+    };
+
+    loadAvailableQuizzes();
+  }, [selectedQuiz]);
 
   const generateQuizLink = async () => {
     if (!adminContext) {
@@ -222,7 +265,16 @@ const AdminDashboard: React.FC = () => {
                 <span className="text-2xl">🔗</span>
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-4">🚀 Generate Quiz Link</h3>
-              <p className="text-gray-600 mb-6">Quiz: {selectedQuiz}</p>
+              
+              {/* Selected Quiz Display (Read-only) */}
+              <div className="mb-6">
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <div className="text-sm font-medium text-blue-700 mb-1">Selected Quiz:</div>
+                  <div className="text-lg font-bold text-blue-900">
+                    {loadingQuizzes ? 'Loading quiz...' : selectedQuiz || 'No quiz selected'}
+                  </div>
+                </div>
+              </div>
               
               {generatedLink ? (
                 <div className="space-y-6">
