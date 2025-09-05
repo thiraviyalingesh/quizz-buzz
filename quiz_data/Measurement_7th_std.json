@@ -1,0 +1,1208 @@
+[
+  {
+    "questionNumber": 1,
+    "questionText": "The perimeter of a parallelogram whose adjacent sides are 6 cm and 5 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 12 cm",
+      "(2) 10 cm", 
+      "(3) 24 cm",
+      "(4) 22 cm"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 2,
+    "questionText": "The area of a parallelogram whose base 10 m and height 7 m is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 70 sq. m",
+      "(2) 35 sq. m",
+      "(3) 7 sq. m", 
+      "(4) 10 sq. m"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 3,
+    "questionText": "The base of the parallelogram with area is 52 sq. cm and height 4 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 48 cm",
+      "(2) 104 cm",
+      "(3) 13 cm",
+      "(4) 26 cm"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 4,
+    "questionText": "What happens to the area of the parallelogram, if the base is increased 2 times and the height is halved?",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Decreases to half",
+      "(2) Remains the same",
+      "(3) Increases by two times",
+      "(4) none"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 5,
+    "questionText": "In a parallelogram the base is three times its height. If the height is 8 cm then the area is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 64 sq. cm",
+      "(2) 192 sq. cm",
+      "(3) 32 sq. cm",
+      "(4) 72 sq. cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 6,
+    "questionText": "The area of the rhombus with side 4 cm and height 3 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 7 sq. cm",
+      "(2) 24 sq. cm",
+      "(3) 12 sq. cm",
+      "(4) 10 sq. cm"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 7,
+    "questionText": "The area of the rhombus when both diagonals measuring 8 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 64 sq. cm",
+      "(2) 32 sq. cm",
+      "(3) 30 sq. cm",
+      "(4) 16 sq. cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 8,
+    "questionText": "The area of the rhombus is 128 sq. cm and the length of one diagonal is 32 cm. The length of the other diagonal is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 12 cm",
+      "(2) 8 cm",
+      "(3) 4 cm",
+      "(4) 20 cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 9,
+    "questionText": "The height of the rhombus whose area 96 sq. m and side 24 m is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 8 m",
+      "(2) 10 m",
+      "(3) 2 m",
+      "(4) 4 m"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 10,
+    "questionText": "The angle between the diagonals of a rhombus is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 120°",
+      "(2) 180°",
+      "(3) 90°",
+      "(4) 100°"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 11,
+    "questionText": "The area of the trapezium, if the parallel sides are measuring 8 cm and 10 cm and the height 5 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 45 sq. cm",
+      "(2) 40 sq. cm",
+      "(3) 18 sq. cm",
+      "(4) 50 sq. cm"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 12,
+    "questionText": "In a trapezium if the sum of the parallel sides is 10 cm and the area is 140 sq. cm, then the height is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 7cm",
+      "(2) 40 cm",
+      "(3) 14 cm",
+      "(4) 28 cm"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 13,
+    "questionText": "When the non-parallel sides of a trapezium are equal then it is known as",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) a square",
+      "(2) a rectangle",
+      "(3) An isosceles trapezium",
+      "(4) a Parallelogram"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 14,
+    "questionText": "The area of a rectangular sheet is 500 cm². If the length of the sheet is 25 cm, what is its width?",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 20 cm",
+      "(2) 17 cm",
+      "(3) 30 cm",
+      "(4) 25 cm"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 15,
+    "questionText": "If the area of rectangle increases from 2 cm² to 4 cm² the perimeter will",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Increase",
+      "(2) Decrease",
+      "(3) Remains same",
+      "(4) None of these"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 16,
+    "questionText": "The area of a square whose perimeter is 4 m",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 1 m²",
+      "(2) 4 m²",
+      "(3) 2 m²",
+      "(4) 3 m²"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 17,
+    "questionText": "The area of rectangle whose length is 15 cm & breadth is 6 m.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 9000 cm²",
+      "(2) 90 cm²",
+      "(3) 9 cm²",
+      "(4) 900 cm²"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 18,
+    "questionText": "The area of parallelogram is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Base + height",
+      "(2) base x height",
+      "(3) base x base",
+      "(4) height x height"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 19,
+    "questionText": "If the area of the triangle is 36 cm² and the height is 3 cm, the base of the triangle will be",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 12 cm",
+      "(2) 39 cm",
+      "(3) 108 cm",
+      "(4) 24 cm"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 20,
+    "questionText": "Which of the following has the formula : Base x Height",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Area of parallelogram",
+      "(2) Area of quadrilateral",
+      "(3) Area of triangle",
+      "(4) Area of trapezium"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 21,
+    "questionText": "The distance around a circular region is known as its",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Area",
+      "(2) Diameter of circle",
+      "(3) Circumference",
+      "(4) radius"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 22,
+    "questionText": "The perimeter of square of side 2.5 m is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 10 m",
+      "(2) 10 m²",
+      "(3) 6.25 m²",
+      "(4) 6.25 m"
+    ],
+    "correct_answer": "B" 
+  },
+  {
+    "questionNumber": 23,
+    "questionText": "The perimeter of rectangle of length 1.5 cm & breadth 2 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 3.4 cm",
+      "(2) 7 cm",
+      "(3) 6 cm",
+      "(4) 3.5 cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 24,
+    "questionText": "The area of parallelogram whose base 6 cm & altitude 7 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 42cm²",
+      "(2) 42 cm",
+      "(3) 13 cm²",
+      "(4) 13 cm"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 25,
+    "questionText": "The height of parallelogram whose area is 35 cm² and altitude 7 cm",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 5 cm",
+      "(2) 5 cm²",
+      "(3) 245 cm",
+      "(4) 245 cm²"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 26,
+    "questionText": "Area of triangle whose base is 15 cm and corresponding altitude is 6 cm will be",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 45 cm²",
+      "(2) 90 cm²",
+      "(3) 45 cm",
+      "(4) 90 cm"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 27,
+    "questionText": "Find the area of a right triangle whose base is 3 cm, perpendicular is 2 cm and hypotenuse is 5 cm.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 3 cm²",
+      "(2) 7.5 cm²",
+      "(3) 5 cm²",
+      "(4) 6 cm"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 28,
+    "questionText": "What will be the area of circular button of radius 7cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 154 cm²",
+      "(2) 49 cm²",
+      "(3) 154 cm",
+      "(4) 3.14 x 7 cm²"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 29,
+    "questionText": "The perimeter of circle is its",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Area",
+      "(2) Circumference",
+      "(3) Radius",
+      "(4) Diameter"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 30,
+    "questionText": "Diameter is __________.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Twice radius",
+      "(2) half radius",
+      "(3) equal to radius",
+      "(4) one-third of radius"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 31,
+    "questionText": "If the area of circle is 44 cm², the area of shaded portion will be",
+    "question_images": [
+      "q31_diagram.png"
+    ],
+    "option_with_images_": [
+      "(1) 11 cm²",
+      "(2) 11 cm",
+      "(3) 22 cm²",
+      "(4) 22 cm²"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 32,
+    "questionText": "If the radius of pipe is 1 cm, the circumference of pipe will be",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 62.8 cm",
+      "(2) 6.28 cm",
+      "(3) 62.8 cm²",
+      "(4) 6.28 cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 33,
+    "questionText": "The area of a circle is 49 π cm². Its circumference is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 7π cm",
+      "(2) 14 π cm",
+      "(3) 21 π cm",
+      "(4) 28 π cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 34,
+    "questionText": "The circumference of two circles are in the ratio 2: 3. The ratio of their areas is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 2 : 3",
+      "(2) 4 : 9",
+      "(3) 9 : 4",
+      "(4) none of these"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 35,
+    "questionText": "The areas of the two circle are in the ratio 4: 9. The ratio of their circumference is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 2 : 3",
+      "(2) 4 : 9",
+      "(3) 9 : 4",
+      "(4) 4 : 9"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 36,
+    "questionText": "Find the circumference of a circle of diameter 21 cm.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 62 cm",
+      "(2) 64 cm",
+      "(3) 66 cm",
+      "(4) 68 cm"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 37,
+    "questionText": "Find the area of a circle whose circumference is 52.8 cm.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 221.76 cm²",
+      "(2) 220.76 cm²",
+      "(3) 200.76 cm²",
+      "(4) none of these"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 38,
+    "questionText": "The area of triangle is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Base x Height",
+      "(2) (1 / 2) x (Base x Height)",
+      "(3) (1 / 2) x (Base + Height)",
+      "(4) Base + Height"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 39,
+    "questionText": "The value of π (pi) is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Ratio of circumference to diameter",
+      "(2) Diameter to circumference",
+      "(3) 21 / 17",
+      "(4) 3.14"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 40,
+    "questionText": "The circumference of the circle is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) π r",
+      "(2) π r²",
+      "(3) π x 2r",
+      "(4) π + 2 r"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 41,
+    "questionText": "The diameter of a circle is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) r²",
+      "(2) 2r",
+      "(3) 2 π r³",
+      "(4) π r²"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 42,
+    "questionText": "Which of the following is the example of the circle?",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) a chair",
+      "(2) a bottle cap",
+      "(3) a cup",
+      "(4) a table"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 43,
+    "questionText": "The area of a circle is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 2 π r",
+      "(2) 2 π r²",
+      "(3) π r²",
+      "(4) π d"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 44,
+    "questionText": "The value of constant π is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 31.4",
+      "(2) 22 / 7",
+      "(3) 7 / 22",
+      "(4) 314"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 45,
+    "questionText": "Perimeter of a square",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Side × Side",
+      "(2) 3 × Side",
+      "(3) 4 × Side",
+      "(4) 2 × Side"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 46,
+    "questionText": "The perimeter of a rectangle whose length (l) and breadth (b) are given, is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 2 (l + b)",
+      "(2) 2l + b",
+      "(3) 2l + 3b",
+      "(4) None of these"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 47,
+    "questionText": "Area of a square",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) side × side",
+      "(2) 2 × side",
+      "(3) 3 × side",
+      "(4) 4 × side"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 48,
+    "questionText": "Area of a rectangle of length l and breadth b is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) l × b",
+      "(2) l + b",
+      "(3) 2 × (l + b)",
+      "(4) 6 × (l + b)"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 49,
+    "questionText": "Area of a triangle",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) base × height",
+      "(2) 1/2 × base × height",
+      "(3) 1/3 × base × height",
+      "(4) 1/4 × base × height"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 50,
+    "questionText": "The area of a square plot is 1600 m². The side of the plot is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 40 m",
+      "(2) 80 m",
+      "(3) 120 m",
+      "(4) 160 m"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 51,
+    "questionText": "The area of a square is 121 m². Its side is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 11 m",
+      "(2) 21 m",
+      "(3) 31 m",
+      "(4) 41 m"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 52,
+    "questionText": "The area of a rectangular field is 250 m². If the breadth of the field is 10 m, find its length.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 25 m",
+      "(2) 50 m",
+      "(3) 100 m",
+      "(4) 125 m"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 53,
+    "questionText": "The perimeter of a rectangle is 30 m. Its length is 10 m. Its breadth is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 5 m",
+      "(2) 10 m",
+      "(3) 15 m",
+      "(4) 3 m"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 54,
+    "questionText": "The perimeter of a square is 48 cm. Its area is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 144 cm²",
+      "(2) 12 cm²",
+      "(3) 48 cm²",
+      "(4) 100 cm²"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 55,
+    "questionText": "The area of a rectangular room is 150 m². If its breadth is 10 m, then find its length.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 15 m",
+      "(2) 25 m",
+      "(3) 50 m",
+      "(4) 55 m"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 56,
+    "questionText": "A rectangular wire of length 40 cm and breadth 20 cm is bent in the shape of a square. The side of the square is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 10 cm",
+      "(2) 20 cm",
+      "(3) 30 cm",
+      "(4) 40 cm"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 57,
+    "questionText": "The area of a parallelogram of base 5 cm and height 3.2 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 8 cm²",
+      "(2) 12 cm²",
+      "(3) 16 cm²",
+      "(4) 20 cm²"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 58,
+    "questionText": "The area of the parallelogram ABCD in which AB = 6.2 cm and the perpendicular from C on AB is 5 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 30 cm²",
+      "(2) 29 cm²",
+      "(3) 28 cm²",
+      "(4) 31 cm²"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 59,
+    "questionText": "One of the sides and the corresponding height of a parallelogram are 3 cm and 1 cm respectively. The area of the parallelogram is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 1 cm²",
+      "(2) 3 cm²",
+      "(3) 6cm²",
+      "(4) 12 cm²"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 60,
+    "questionText": "The area of a parallelogram is 20 cm² and the height is 2 cm. Find the corresponding base.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 3 cm",
+      "(2) 4 cm",
+      "(3) 5 cm",
+      "(4) 10 cm"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 61,
+    "questionText": "If the area of a parallelogram is 16 cm² and the base is 8 cm, find the height.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 1 cm",
+      "(2) 2 cm",
+      "(3) 3 cm",
+      "(4) 4 cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 62,
+    "questionText": "Find the area of ∆ ABC",
+    "question_images": [
+      "q62_diagram.png"
+    ],
+    "option_with_images_": [
+      "(1) 3 cm²",
+      "(2) 4 cm²",
+      "(3) 6 cm²",
+      "(4) 12 cm²"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 63,
+    "questionText": "The radius of a circle is 7 cm. Its circumference is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 22 cm",
+      "(2) 44 cm",
+      "(3) 11 cm",
+      "(4) 66cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 64,
+    "questionText": "The diameter of a circle is 28 cm. Find its circumference",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 14 cm",
+      "(2) 24 cm",
+      "(3) 88 cm",
+      "(4) 66 cm"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 65,
+    "questionText": "The radius of a circle is 7 cm. Find its area",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 154 cm²",
+      "(2) 77 cm²",
+      "(3) 11 cm²",
+      "(4) 22 cm²"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 66,
+    "questionText": "When the circumference and area of a circle are numerically equal, what is the diameter numerically equal to?",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Area",
+      "(2) Circumference",
+      "(3) 271",
+      "(4) 4"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 67,
+    "questionText": "The area of the rhombus when both diagonals measuring 8 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 64 sq. cm",
+      "(2) 32 sq. cm",
+      "(3) 30 sq. cm",
+      "(4) 16 sq. cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 68,
+    "questionText": "In a parallelogram the base is three times its height. If the height is 8 cm then the area is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 64 sq. cm",
+      "(2) 192 sq. cm",
+      "(3) 32 sq. cm",
+      "(4) 72 sq. cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 69,
+    "questionText": "The base of the parallelogram with area is 52 sq. cm and height 4 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 48 cm",
+      "(2) 104 cm",
+      "(3) 13 cm",
+      "(4) 26 cm"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 70,
+    "questionText": "The perimeter of a parallelogram whose adjacent sides are 6 cm and 5 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 12 cm",
+      "(2) 10 cm",
+      "(3) 24 cm",
+      "(4) 22 cm"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 71,
+    "questionText": "When the non-parallel sides of a trapezium is referred as",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) A square",
+      "(2) Legs",
+      "(3) An isosceles trapezium",
+      "(4) A parallelogram"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 72,
+    "questionText": "In a trapezium if the sum of the parallel sides is 10 m and the area is 140 sq. m then the height is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 7 cm",
+      "(2) 40 cm",
+      "(3) 14 cm",
+      "(4) 28 cm"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 73,
+    "questionText": "The area of the rhombus with side 4 cm and height 3 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 7 sq. cm",
+      "(2) 24 sq. cm",
+      "(3) 12 sq. cm",
+      "(4) 10 sq. cm"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 74,
+    "questionText": "The height of the rhombus whose area 96 sq. m and side 24 m is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 8 m",
+      "(2) 10 m",
+      "(3) 2 m",
+      "(4) 4 m"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 75,
+    "questionText": "The area of parallelogram whose base 10 m and height 7 m is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 70 sq. m",
+      "(2) 35 sq. m",
+      "(3) 7 sq. m",
+      "(4) 10 sq. m"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 76,
+    "questionText": "The area of the rhombus is 128 sq. cm. and the length of one diagonal is 32 cm. The length of the other diagonal is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 12 cm",
+      "(2) 8 cm",
+      "(3) 4 cm",
+      "(4) 20 cm"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 77,
+    "questionText": "The area of the trapezium, if the parallel sides are measuring 8 cm and 10 cm and the height 5 cm is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 45 sq. cm",
+      "(2) 40 sq. cm",
+      "(3) 18 sq. cm",
+      "(4) 50 sq. cm"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 78,
+    "questionText": "What happens to the area of the parallelogram if the base is decreased 2 times and the height is halved?",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Decreases to half",
+      "(2) (1 / 4) th of its original area",
+      "(3) Increase by two times",
+      "(4) None"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 79,
+    "questionText": "What is the circumference of the circle of diameter 10 cm?",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 35 cm",
+      "(2) 30 cm",
+      "(3) 31.4 cm",
+      "(4) none of these"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 80,
+    "questionText": "The perimeter of the rectangular sheet is 100 cm. if the length is 35 cm, find its breath?",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 35 cm",
+      "(2) 100 / 35 cm",
+      "(3) 15 cm",
+      "(4) None of these"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 81,
+    "questionText": "If the radius of the circle is doubled, then the area is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Doubled",
+      "(2) halved",
+      "(3) 4 times",
+      "(4) 3 times"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 82,
+    "questionText": "The perimeter of the square and rectangle are same, then which figure has larger area",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Square",
+      "(2) Rectangle",
+      "(3) Both",
+      "(4) Can't say"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 83,
+    "questionText": "The diagonal of a parallelogram divides it into two triangles with ------- area.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Equal",
+      "(2) unequal",
+      "(3) 3 times",
+      "(4) 4 times"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 84,
+    "questionText": "Ram wants the four walls of this room painted green at of Rs. 5.60 per sq.m, if the dimensions of the rooms are 6m x 5m x 4m, then the cost of painting is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Rs. 493.00",
+      "(2) Rs. 492.85",
+      "(3) Rs. 492.80",
+      "(4) Rs. 495.00"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 85,
+    "questionText": "If the radius of a bangle is 2 inches then find the diameter.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 3 inches",
+      "(2) 4 inches",
+      "(3) 5 inches",
+      "(4) 6 inches"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 86,
+    "questionText": "The perimeter of the parallelogram is 48 cm, if one of the side measures 10 cm, the adjacent side would be,",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 12 cm",
+      "(2) 13 cm",
+      "(3) 14 cm",
+      "(4) 15 cm"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 87,
+    "questionText": "The three sides of the triangles are In the ratio 2 : 3 : 4 and the perimeter is 54 cm, then the sides (in cm) of triangles are",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 12, 18, 24",
+      "(2) 13, 15, 26",
+      "(3) 10, 20, 24",
+      "(4) None"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 88,
+    "questionText": "If the radius of the circle is π / 8 cm, find its circumference",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) π / 4",
+      "(2) 2 π / 16",
+      "(3) π ² / 4",
+      "(4) 2 π ²"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 89,
+    "questionText": "Area of the trapezium is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) l x b",
+      "(2) 2 h (l + b)",
+      "(3) (1 /2) x (b x h)",
+      "(4) 2 x d (sum of parallel angles)"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 90,
+    "questionText": "Area between two concentric circles are ….",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) (22 / 7) r",
+      "(2) π r²",
+      "(3) A = π (R + r) (R - r)",
+      "(4) πr²h"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 91,
+    "questionText": "In the formula C = 2πr , 'r' refers to",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Circumference",
+      "(2) Area",
+      "(3) Rotation",
+      "(4) Radius"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 92,
+    "questionText": "The distance around a closed figure is called its:",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Area",
+      "(2) Volume",
+      "(3) Perimeter",
+      "(4) Circumference"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 93,
+    "questionText": "If the circumference of the circle is 82 π, the value of r is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 41 cm",
+      "(2) 82 cm",
+      "(3) 21 cm",
+      "(4) 20 cm"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 94,
+    "questionText": "The ratio of the area of a circle to the area of its semi-circle is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 3:4",
+      "(2) 2: 1",
+      "(3) 1: 3",
+      "(4) 2:3"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 95,
+    "questionText": "Area of the circular path is",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) π (R² – r²) sq. units",
+      "(2) πr² sq. units",
+      "(3) 2πr² sq. units",
+      "(4) πr² + 2r"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 96,
+    "questionText": "Circumference of a circle is always",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) More than three times of its diameter",
+      "(2) Three times of its diameter",
+      "(3) Less than three times of its diameter",
+      "(4) Three times of its radius"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 97,
+    "questionText": "In reference to a circle the value of π is equal to",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Area / Circumference",
+      "(2) Area / Diameter",
+      "(3) Circumference / Diameter",
+      "(4) Circumference / Radius"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 98,
+    "questionText": "The unit of area is always:",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) Linear",
+      "(2) Square units",
+      "(3) Cubic units",
+      "(4) Ratio"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 99,
+    "questionText": "Which of the following figures has a circular shape?",
+    "question_images": [],
+    "option_with_images_": [
+      "q99_option1.png",
+      "q99_option2.png",
+      "q99_option3.png",
+      "q99_option4.png"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 100,
+    "questionText": "Area of the square is 100 cm² and the area of the circle is 38.5 cm². Find the area of the shaded path?",
+    "question_images": [
+      "q100_diagram.png"
+    ],
+    "option_with_images_": [
+      "(1) 61.5 cm²",
+      "(2) 73. 5 cm²",
+      "(3) 59. 5 cm²",
+      "(4) 64.5 cm²"
+    ],
+    "correct_answer": "A"
+  }
+]

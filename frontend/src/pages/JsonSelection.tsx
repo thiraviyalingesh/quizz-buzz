@@ -18,7 +18,8 @@ const JsonSelection: React.FC = () => {
           'NEET-2025-Code-48.json',
           '7th std Maths.json',
           '7th std Science.json',
-          'Number_System_7th_std.json'
+          'Number_System_7th_std.json',
+          'Measurement_7th_std.json',
         ];
         
         // Load each quiz file using API instead of direct fetch
