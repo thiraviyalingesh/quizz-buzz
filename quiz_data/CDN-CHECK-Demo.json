@@ -1,0 +1,109 @@
+[
+  {
+    "questionNumber": 1,
+    "questionText": "Let a₁, a₂, a₃, … be a G.P. of increasing positive terms. If a₁a₅ = 28 and a₂ + a₄ = 29, then a₆ is equal to:",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) 628,",
+      "(2) 812,",
+      "(3) 526,",
+      "(4) 784,"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 2,
+    "questionText": "A uniform circular disc of radius 'R' and mass 'M' is rotating about an axis perpendicular to its plane and passing through its centre. A small circular part of radius R/2 is removed from the original disc as shown in the figure. Find the moment of inertia of the remaining part of the original disc about the axis as given above.",
+    "question_images": [
+      "https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-4.jpg?height=435&width=443&top_left_y=345&top_left_x=211"
+    ],
+    "option_with_images_": [
+      "(1) (7/32)MR²,",
+      "(2) (9/32)MR²,",
+      "(3) (17/32)MR²,",
+      "(4) (13/32)MR²,"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 3,
+    "questionText": "A bob of mass m is suspended at a point O by a light string of length l and left to perform vertical motion (circular) as shown in figure. Initially, by applying horizontal velocity v₀ at the point 'A', the string becomes slack when, the bob reaches at the point 'D'. The ratio of the kinetic energy of the bob at the points B and C is",
+    "question_images": [
+      "https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-4.jpg?height=535&width=432&top_left_y=1833&top_left_x=388"
+    ],
+    "option_with_images_": [
+      "(1) 1,",
+      "(2) 2,",
+      "(3) 4,",
+      "(4) 3,"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 4,
+    "questionText": "Which of the following circuits represents a forward biased diode? (A) (B) (C) (E) Choose the correct answer from the options given below :",
+    "question_images": [
+      "https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=204&width=423&top_left_y=536&top_left_x=374",
+      "https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=209&width=486&top_left_y=768&top_left_x=371",
+      "https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=207&width=423&top_left_y=1010&top_left_x=374",
+      "https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=198&width=438&top_left_y=1473&top_left_x=371"
+    ],
+    "option_with_images_": [
+      "(1) (A) and (D) only,",
+      "(2) (B), (D) and (E) only,",
+      "(3) (C) and (E) only,",
+      "(4) (B), (C) and (E) only,"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 5,
+    "questionText": "Sliding contact of a potentiometer is in the middle of the potentiometer wire having resistance Rp = 1 Ω as shown in the figure. An external resistance of Re = 2 Ω is connected via the sliding contact. The electric current in the circuit is :",
+    "question_images": [
+      "https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=330&width=544&top_left_y=1901&top_left_x=219"
+    ],
+    "option_with_images_": [
+      "(1) 0.9 A,",
+      "(2) 1.35 A,",
+      "(3) 0.3 A,",
+      "(4) 1.0 A,"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 6,
+    "questionText": "A closed organ and an open organ tube are filled by two different gases having same bulk modulus but different densities ρ₁ and ρ₂, respectively. The frequency of 9th harmonic of closed tube is identical with 4th harmonic of open tube. If the length of the closed tube is 10 cm and the density ratio of the gases is ρ₁:ρ₂ = 1:16, then the length of the open tube is :",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) λa/(2ε₀),",
+      "(2) 20/7 cm, https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-6.jpg?height=318&width=315&top_left_y=1753&top_left_x=1484",
+      "(3) λa/(2ε₀),",
+      "(4) λa/(8ε₀),"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 7,
+    "questionText": "Which of the following resistivity (ρ) v/s temperature (T) curves is most suitable to be used in wire bound standard resistors?",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) , https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=298&width=477&top_left_y=379&top_left_x=274",
+      "(2) , https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=301&width=480&top_left_y=376&top_left_x=1102",
+      "(3) , https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=289&width=475&top_left_y=708&top_left_x=268",
+      "(4) , https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=295&width=478&top_left_y=696&top_left_x=1107"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 8,
+    "questionText": "Three conductors of same length having thermal conductivity k₁, k₂ and k₃ are connected as shown in figure.",
+    "question_images": [],
+    "option_with_images_": [
+      "(1) (A) and (E) Only,",
+      "(2) (B) and (C) Only, https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=358&width=612&top_left_y=1998&top_left_x=231",
+      "(3) (B) and (C) Only,",
+      "(4) (C), (D) and (E) Only (4), https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=295&width=478&top_left_y=696&top_left_x=1107"
+    ],
+    "correct_answer": "A"
+  }
+]
