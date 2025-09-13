@@ -425,10 +425,10 @@ const QuizPage: React.FC = () => {
                   {currentQuestion.question_images.map((imagePath, index) => (
                     <div key={index} className="border rounded-lg p-2 md:p-3 bg-gray-50 w-full md:w-auto transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
                       <img
-                        src={getImagePath(imagePath)}
+                        src={imagePath.includes('cdn.mathpix.com') || imagePath.startsWith('http') ? imagePath : getImagePath(imagePath)}
                         alt={`Diagram ${index + 1}`}
                         className="max-h-48 md:max-h-64 w-full md:w-auto object-contain rounded cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:scale-102"
-                        onClick={() => setSelectedImage(getImagePath(imagePath))}
+                        onClick={() => setSelectedImage(imagePath.includes('cdn.mathpix.com') || imagePath.startsWith('http') ? imagePath : getImagePath(imagePath))}
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
                         }}
@@ -449,7 +449,13 @@ const QuizPage: React.FC = () => {
                 {currentQuestion.option_with_images_.map((option, index) => {
                   const optionLabel = String.fromCharCode(65 + index);
                   const isSelected = answers[currentQuestion.questionNumber] === optionLabel;
-                  const isImageOption = option.includes('.png') || option.includes('.jpg') || option.includes('.jpeg');
+
+                  // Parse comma-separated format: "text, image_url" or "text,, image_url"
+                  const parts = option.includes(',,') ? option.split(',,') : option.split(',');
+                  const optionText = parts[0].trim();
+                  const imageUrl = parts.length > 1 && parts[1].trim() ? parts[1].trim() : null;
+                  const isImageOption = imageUrl && (imageUrl.includes('.png') || imageUrl.includes('.jpg') || imageUrl.includes('.jpeg'));
+
                   
                   return (
                     <div
@@ -493,15 +499,21 @@ const QuizPage: React.FC = () => {
                               </span>
                               
                               <div className="flex-1">
-                                {isImageOption ? (
-                                  <div className="mt-1">
+                                {/* Always show text if present */}
+                                {optionText && (
+                                  <span className="text-sm md:text-base text-gray-800 leading-relaxed">{optionText}</span>
+                                )}
+
+                                {/* Show image if present */}
+                                {isImageOption && imageUrl && (
+                                  <div className="mt-2">
                                     <img
-                                      src={getImagePath(option)}
-                                      alt={`Option ${optionLabel}`}
+                                      src={imageUrl.includes('cdn.mathpix.com') || imageUrl.startsWith('http') ? imageUrl : getImagePath(imageUrl)}
+                                      alt={`Option ${optionLabel} Image`}
                                       className="max-h-16 md:max-h-20 object-contain rounded border cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:scale-105"
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        setSelectedImage(getImagePath(option));
+                                        setSelectedImage(imageUrl.includes('cdn.mathpix.com') || imageUrl.startsWith('http') ? imageUrl : getImagePath(imageUrl));
                                       }}
                                       onError={(e) => {
                                         e.currentTarget.style.display = 'none';
@@ -510,7 +522,10 @@ const QuizPage: React.FC = () => {
                                       draggable={false}
                                     />
                                   </div>
-                                ) : (
+                                )}
+
+                                {/* Fallback for old format - if no comma separator detected */}
+                                {!optionText && !imageUrl && (
                                   <span className="text-sm md:text-base text-gray-800 leading-relaxed">{option}</span>
                                 )}
                               </div>
