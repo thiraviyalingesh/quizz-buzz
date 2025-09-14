@@ -411,11 +411,79 @@ const QuizPage: React.FC = () => {
         <div className="flex-1 flex flex-col overflow-hidden p-2 md:p-4">
           {/* Question Content - Scrollable */}
           <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-white rounded-lg shadow-sm animate-slideInLeft">
-            {/* Question Text */}
+            {/* Question Text with Images Support */}
             <div className="mb-4 md:mb-6 animate-fadeIn">
-              <p className="text-base md:text-lg font-medium text-gray-800 leading-relaxed">
-                {currentQuestion.questionText}
-              </p>
+              {(() => {
+                // Parse the format: "text,,(A),,url (B),,url"
+                let questionParts = [];
+                if (currentQuestion.questionText.includes(',,')) {
+                  // First split by ,,
+                  let parts = currentQuestion.questionText.split(',,');
+                  for (let i = 0; i < parts.length; i++) {
+                    let part = parts[i].trim();
+                    if (part) {
+                      if (i === 0) {
+                        // First part is just text
+                        questionParts.push(part);
+                      } else if (part.startsWith('http')) {
+                        // This is an image URL that may have text after it
+                        let urlMatch = part.match(/(https?:\/\/[^\s]+)/);
+                        if (urlMatch) {
+                          questionParts.push(urlMatch[1]); // Add the URL
+                          // Add any remaining text after the URL
+                          let remaining = part.replace(urlMatch[1], '').trim();
+                          if (remaining) {
+                            questionParts.push(remaining);
+                          }
+                        } else {
+                          questionParts.push(part);
+                        }
+                      } else {
+                        questionParts.push(part);
+                      }
+                    }
+                  }
+                } else {
+                  questionParts = [currentQuestion.questionText];
+                }
+
+                // Debug logging
+                console.log('Original questionText:', currentQuestion.questionText);
+                console.log('Parsed questionParts:', questionParts);
+
+                return (
+                  <div className="space-y-4 w-full">
+                    {questionParts.map((part, index) => {
+                      // Check if this part is an image URL (CDN or local)
+                      const isImage = (part.startsWith('http') || part.includes('cdn.mathpix.com')) && (part.includes('.jpg') || part.includes('.png') || part.includes('.jpeg'));
+
+                      if (isImage) {
+                        return (
+                          <div key={index} className="flex justify-center my-4">
+                            <img
+                              src={part}
+                              alt={`Question Image ${index + 1}`}
+                              className="max-h-48 md:max-h-64 w-auto object-contain rounded border cursor-pointer hover:shadow-lg transition-all duration-300 transform hover:scale-105 bg-white p-2"
+                              onClick={() => setSelectedImage(part)}
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                              }}
+                              onContextMenu={(e) => e.preventDefault()}
+                              draggable={false}
+                            />
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <p key={index} className="text-base md:text-lg font-medium text-gray-800 leading-relaxed my-2 px-2">
+                            {part}
+                          </p>
+                        );
+                      }
+                    })}
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Question Images - Mobile Optimized */}
