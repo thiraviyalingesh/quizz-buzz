@@ -1,0 +1,101 @@
+[
+  {
+    "questionNumber": 1,
+    "questionText": "Let a₁, a₂, a₃, … be a G.P. of increasing positive terms. If a₁a₅ = 28 and a₂ + a₄ = 29, then a₆ is equal to:,,",
+    "option_with_images_": [
+      "(1) 628,",
+      "(2) 812,",
+      "(3) 526,",
+      "(4) 784,"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 2,
+    "questionText": "Let for f(x) = 7tan⁸x + 7tan⁶x - 3tan⁴x - 3tan²x, I₁ = ∫(0 to π/4) f(x) dx and I₂ = ∫(0 to π/4) xf(x) dx. Then 7I₁ + 12I₂ is equal to :,,",
+    "option_with_images_": [
+      "(1) 2,",
+      "(2) 1,",
+      "(3) 2π,",
+      "(4) π,"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 3,
+    "questionText": "A uniform circular disc of radius 'R' and mass 'M' is rotating about an axis perpendicular to its plane and passing through its centre. A small circular part of radius R/2 is removed from the original disc as shown in the figure. Find the moment of inertia of the remaining part of the original disc about the axis as given above.,,(A),,https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-4.jpg?height=435&width=443&top_left_y=345&top_left_x=211 Choose the correct answer from options below,,",
+    "option_with_images_": [
+      "(1) (7/32)MR²,",
+      "(2) (9/32)MR²,",
+      "(3) (17/32)MR²,",
+      "(4) (13/32)MR²,"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 4,
+    "questionText": "A bob of mass m is suspended at a point O by a light string of length l and left to perform vertical motion (circular) as shown in figure. Initially, by applying horizontal velocity v₀ at the point 'A', the string becomes slack when, the bob reaches at the point 'D'. The ratio of the kinetic energy of the bob at the points B and C is,,",
+    "option_with_images_": [
+      "(1) 1, https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-4.jpg?height=535&width=432&top_left_y=1833&top_left_x=388",
+      "(2) 2,",
+      "(3) 4,",
+      "(4) 3,"
+    ],
+    "correct_answer": "D"
+  },
+  {
+    "questionNumber": 5,
+    "questionText": "Which of the following circuits represents a forward biased diode? Choose the correct answer from the options given below :,,(A),,https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=204&width=423&top_left_y=536&top_left_x=374 (B),,https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=209&width=486&top_left_y=768&top_left_x=371 (C),,https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=207&width=423&top_left_y=1010&top_left_x=374 (D),,https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=213&width=483&top_left_y=1244&top_left_x=371 (E),,https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=198&width=438&top_left_y=1473&top_left_x=371 Choose the correct answer from options below,,",
+    "option_with_images_": [
+      "(1) (A) and (D) only,",
+      "(2) (B), (D) and (E) only,",
+      "(3) (C) and (E) only,",
+      "(4) (B), (C) and (E) only,"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 6,
+    "questionText": "Sliding contact of a potentiometer is in the middle of the potentiometer wire having resistance Rₚ = 1 Ω as shown in the figure. An external resistance of Rₑ = 2 Ω is connected via the sliding contact. The electric current in the circuit is :,,(A),,https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-5.jpg?height=330&width=544&top_left_y=1901&top_left_x=219 Choose the correct answer from options below,,",
+    "option_with_images_": [
+      "(1) 0.9 A,",
+      "(2) 1.35 A,",
+      "(3) 0.3 A,",
+      "(4) 1.0 A,"
+    ],
+    "correct_answer": "B"
+  },
+  {
+    "questionNumber": 7,
+    "questionText": "A small point of mass m is placed at a distance 2R from the centre 'O' of a big uniform solid sphere of mass M and radius R. The gravitational force on 'm' due to M is F₁. A spherical part of radius R/3 is removed from the big sphere as shown in the figure and the gravitational force on m due to remaining part of M is found to be F₂. The value of ratio F₁:F₂ is,,",
+    "option_with_images_": [
+      "(1) 12:11, https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-6.jpg?height=444&width=689&top_left_y=445&top_left_x=805",
+      "(2) 11:10,",
+      "(3) 12:9,",
+      "(4) 16:9,"
+    ],
+    "correct_answer": "C"
+  },
+  {
+    "questionNumber": 8,
+    "questionText": "of the combination is,,(A),,https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-7.jpg?height=535&width=892&top_left_y=1039&top_left_x=576 Choose the correct answer from options below,,",
+    "option_with_images_": [
+      "(1) (1/6)(1/|R₁| - 1/|R₂|),",
+      "(2) -(1/6)(1/|R₁| + 1/|R₂|),",
+      "(3) (1/6)(1/|R₁| + 1/|R₂|),",
+      "(4) -(1/6)(1/|R₁| - 1/|R₂|),"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 9,
+    "questionText": "Which of the following resistivity (ρ) vs temperature (T) curves is most suitable to be used in wire bound standard resistors?,,",
+    "option_with_images_": [
+      "(1) , https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=298&width=477&top_left_y=379&top_left_x=274",
+      "(2) , https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=301&width=480&top_left_y=376&top_left_x=1102",
+      "(3) , https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=289&width=475&top_left_y=708&top_left_x=268",
+      "(4) , https://cdn.mathpix.com/cropped/2025_09_08_deaac7a2c52c1442bf2bg-8.jpg?height=295&width=478&top_left_y=696&top_left_x=1107"
+    ],
+    "correct_answer": "D"
+  }
+]
