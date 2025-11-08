@@ -21,6 +21,7 @@ const JsonSelection: React.FC = () => {
           'Number_System_7th_std.json',
           'Measurement_7th_std.json',
           'Demo-Quizz.json',
+          'Latest-Quizz',
         ];
         
         // Load each quiz file using API instead of direct fetch

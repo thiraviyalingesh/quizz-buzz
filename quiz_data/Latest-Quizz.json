@@ -1,0 +1,24 @@
+[
+  {
+    "questionNumber": 1,
+    "questionText": "Given is a thin convex lens of glass (refractive index mu ) and each side having radius of curvature R. One side is polished for complete reflection. At what distance from the lens, an object be placed on the optic axis so that,,",
+    "option_with_images_": [
+      "(1) R / mu,",
+      "(2) R /(2 mu-3),",
+      "(3) R /(2 mu-3),",
+      "(4) R /(2 mu-1),"
+    ],
+    "correct_answer": "A"
+  },
+  {
+    "questionNumber": 2,
+    "questionText": ",,(A),,https://res.cloudinary.com/quizzbuzz/image/upload/v1762620826/jm5w5b0pahavfjfqpm6y.jpg Choose the correct answer from options below,,",
+    "option_with_images_": [
+      "(1) , https://res.cloudinary.com/quizzbuzz/image/upload/v1762620826/xwdihcbjtvjcprddu7cn.jpg",
+      "(2) , https://res.cloudinary.com/quizzbuzz/image/upload/v1762620828/zdzuc6dnv1tifxmqhiov.jpg",
+      "(3) , https://res.cloudinary.com/quizzbuzz/image/upload/v1762620828/zdzuc6dnv1tifxmqhiov.jpg",
+      "(4) , https://res.cloudinary.com/quizzbuzz/image/upload/v1762620829/bw3eyr1ffno21pntqadp.jpg"
+    ],
+    "correct_answer": "A"
+  }
+]
